@@ -1,0 +1,21 @@
+.LogIn{
+    width: 113px;
+    height: 47px;
+    font-family: 'IBM Plex Sans';
+    font-size: 16px;
+    border: 1px solid #242424;
+    background: white;
+    color: #242424;
+}
+.SignIn{
+    width: 113px;
+    height: 47px;
+    font-family: 'IBM Plex Sans';
+    font-size: 16px;
+    border: 1px solid #242424;
+    background: black;
+    color:white;
+}
+.button{
+    display: flex; justify-content: space-around;
+}

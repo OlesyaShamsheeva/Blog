@@ -1,50 +1,50 @@
-import {useState} from "react";
 
 import styles from "./Menu.module.css"
+import {NavLink} from "react-router-dom";
 
-export const Menu = ({logOut,isHeader}) => {
-    const [activeLink, setActiveLink] = useState(1)
+export const Menu = ({logOut, isHeader, }) => {
 
     const links = [
         {
             id: 1,
             value: "All articles",
-            link: "#"
+            path: "/all-articles"
         },
         {
             id: 2,
             value: "My articles",
-            link: "#"
+            path: "/my-articles"
         },
         {
             id: 3,
             value: "Add article",
-            link: "#"
+            path: "/add-article"
         },
         {
             id: 4,
             value: "Profile",
-            link: "#"
+            path: "/profile"
         },]
 
-    const Link = ({id, value, link}) => (
-        <a
-            href={link}
-            onClick={() => setActiveLink(id)}
-            className={activeLink === id ? styles.active : ""}
+    const Link = ({id, value, href}) => (
+        <NavLink
+            to={href}
+            className={(link) => link.isActive ? styles.active : ""}
         >
             {value}
-        </a>
+        </NavLink>
     )
 
     return (
         <div className={styles.wrapper}>
-            <nav >
+            <nav>
                 {links.map((link) => {
-                    return <Link key={link.id} value={link.value} id={link.id} href={link.link}/>
+                    return <Link key={link.id} value={link.value} href={link.path}/>
                 })}
             </nav>
-            <button onClick={() => logOut()} className={(isHeader)?styles.header_button:styles.footer_button}>Logout</button>
+            <button onClick={() => logOut()}
+                    className={(isHeader) ? styles.header_button : styles.footer_button}>Logout
+            </button>
         </div>
     )
 }

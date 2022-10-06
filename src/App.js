@@ -1,7 +1,7 @@
 import './App.css';
-import {Header} from "./components/Header";
-import {Footer} from "./components/Footer";
 import {createContext, useState} from "react";
+import {MainContainer} from "./components/MainContainer/MainConteiner";
+import {Route, Routes} from "react-router-dom";
 
 export const MyContext = createContext(null)
 
@@ -16,8 +16,13 @@ function App() {
     return (
         <MyContext.Provider value={providerValues}>
             <div className="App">
-                <Header />
-                <Footer />
+                <Routes>
+                    <Route path='/all-articles' element={<MainContainer><div>1111</div></MainContainer>} />
+                    <Route path='/my-articles' element={<MainContainer><div>222</div></MainContainer>} />
+                    <Route path='/add-article' element={<MainContainer><div>333</div></MainContainer>} />
+                    <Route path='/profile' element={<MainContainer><div>444</div></MainContainer>} />
+                </Routes>
+                <MainContainer/>
             </div>
         </MyContext.Provider>
     );

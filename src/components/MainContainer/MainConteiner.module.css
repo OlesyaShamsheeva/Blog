@@ -1,0 +1,16 @@
+.wrapper{
+  min-height: 100%;
+  display: flex;flex-direction: column;
+}
+
+.main{
+min-height: calc(100vh - (176px + 112px));
+
+}
+.footer {
+}
+
+.block {
+  height: 300px;
+  background-color: red;
+}

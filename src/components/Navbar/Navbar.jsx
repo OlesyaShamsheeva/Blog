@@ -12,7 +12,7 @@ export const Navbar = ({logo,isHeader}) => {
         <>
             <Logo logo={logo}/>
             {isAuth ? (
-                    <Menu isHeader={isHeader} logOut={() => setIsAuth(false)}/>
+                    <Menu  isHeader={isHeader} logOut={() => setIsAuth(false)}/>
                 ) : (
                     <NavAction isHeader={isHeader} auth={() => setIsAuth(true)}/>
                 )

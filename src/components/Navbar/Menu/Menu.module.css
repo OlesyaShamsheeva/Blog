@@ -1,0 +1,33 @@
+
+.wrapper{
+  display: flex;justify-content: space-between;
+  align-items: center;
+}
+a{
+    padding: 16px;
+    font-size: 15px;
+    line-height: 15px;
+    color: #8C8C8C;
+
+    text-decoration: none;
+}
+.active{
+    border-bottom: 1px solid black;
+}
+button{
+    width: 113px;
+    height: 47px;
+    font-family: 'IBM Plex Sans';
+    font-size: 16px;
+    border: 1px solid #242424;
+}
+.header_button{
+  background-color:white;
+  color:black;
+  border-color: black;
+}
+.footer_button{
+  background-color: #242424;
+  color: white;
+  border-color: white;
+}

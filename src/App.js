@@ -17,12 +17,19 @@ function App() {
         <MyContext.Provider value={providerValues}>
             <div className="App">
                 <Routes>
-                    <Route path='/all-articles' element={<MainContainer><div>1111</div></MainContainer>} />
-                    <Route path='/my-articles' element={<MainContainer><div>222</div></MainContainer>} />
-                    <Route path='/add-article' element={<MainContainer><div>333</div></MainContainer>} />
-                    <Route path='/profile' element={<MainContainer><div>444</div></MainContainer>} />
+                    <Route path='/all-articles' element={<MainContainer>
+                        <div>1111</div>
+                    </MainContainer>}/>
+                    <Route path='/my-articles' element={<MainContainer>
+                        <div>222</div>
+                    </MainContainer>}/>
+                    <Route path='/add-article' element={<MainContainer>
+                        <div>333</div>
+                    </MainContainer>}/>
+                    <Route path='/profile' element={<MainContainer>
+                        <div>444</div>
+                    </MainContainer>}/>
                 </Routes>
-                <MainContainer/>
             </div>
         </MyContext.Provider>
     );

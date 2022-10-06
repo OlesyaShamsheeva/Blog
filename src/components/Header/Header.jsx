@@ -4,6 +4,6 @@ import logo from "../../assets/imgs/logoHeader.png"
 
 export const Header = () => {
     return <header className={styles.header}>
-        <Navbar logo={logo} isHeader={true}>111</Navbar>
+        <Navbar logo={logo} isHeader={true}></Navbar>
     </header>
 }

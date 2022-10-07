@@ -2,8 +2,8 @@ import './App.css';
 import {createContext, useState} from "react";
 import {MainContainer} from "./components/MainContainer/MainConteiner";
 import {Route, Routes} from "react-router-dom";
-import {RegistrationUser} from "./components/RegistrationUser";
-import {AuthorizationUser} from "./components/AuthorizationUser";
+import {RegistrationUser} from "./pages/RegistrationUser";
+import {AuthorizationUser} from "./pages/AuthorizationUser";
 
 export const MyContext = createContext(null)
 

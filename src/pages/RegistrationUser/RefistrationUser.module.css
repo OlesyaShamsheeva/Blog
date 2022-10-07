@@ -53,3 +53,30 @@ margin-bottom: 110px;
 
   color: #FFFFFF;
 }
+
+.link{
+  padding-top: 24px;
+  padding-bottom:281px;
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 15px;
+  color: #242424;
+}
+.active{
+  padding-top: 24px;
+  padding-bottom:281px;
+  font-family: 'IBM Plex Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 15px;
+  color: #242424;
+  text-decoration-line: underline;
+  font-weight: bold;
+}
+.error{
+  color: red;
+  font-size: 18px;
+}

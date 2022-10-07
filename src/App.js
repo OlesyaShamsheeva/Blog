@@ -2,6 +2,8 @@ import './App.css';
 import {createContext, useState} from "react";
 import {MainContainer} from "./components/MainContainer/MainConteiner";
 import {Route, Routes} from "react-router-dom";
+import {RegistrationUser} from "./components/RegistrationUser";
+import {AuthorizationUser} from "./components/AuthorizationUser";
 
 export const MyContext = createContext(null)
 
@@ -29,6 +31,8 @@ function App() {
                     <Route path='/profile' element={<MainContainer>
                         <div>444</div>
                     </MainContainer>}/>
+                    <Route path='/registration' element={<MainContainer><RegistrationUser/></MainContainer>}/>
+                    <Route path='/authorization' element={<MainContainer><AuthorizationUser/></MainContainer>}/>
                 </Routes>
             </div>
         </MyContext.Provider>

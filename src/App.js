@@ -4,6 +4,7 @@ import {MainContainer} from "./components/MainContainer/MainConteiner";
 import {Route, Routes} from "react-router-dom";
 import {RegistrationUser} from "./pages/RegistrationUser";
 import {AuthorizationUser} from "./pages/AuthorizationUser";
+import {AllArticles} from "./pages/AllArticles/AllArticles";
 
 export const MyContext = createContext(null)
 
@@ -20,7 +21,7 @@ function App() {
             <div className="App">
                 <Routes>
                     <Route path='/all-articles' element={<MainContainer>
-                        <div>1111</div>
+                       <AllArticles/>
                     </MainContainer>}/>
                     <Route path='/my-articles' element={<MainContainer>
                         <div>222</div>

@@ -1,32 +1,37 @@
 import styles from "./AuthorizationUser.module.css"
 import {NavLink, useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {MyContext} from "../../App";
 
 export const AuthorizationUser = () => {
     const navCreate = useNavigate()
-
+    const { isAuth, setIsAuth } = useContext(MyContext)
     const [errorAut, setErrorAut] = useState(false)
     const [stateAut, setStateAut] = useState({
         email: '', password: '',
     })
-    const users = JSON.parse(localStorage.getItem("Users"))
+
+    const users = JSON.parse(localStorage.getItem("Users")) || []
+
     const submitFormAut = () => {
-        const emailUser = users.find(el => el.email === stateAut.email)
-        if (!emailUser) {
-            const user = {...stateAut, id: Date.now()}
-            localStorage.setItem("Users", JSON.stringify([...users, user]))
+        const userAuth = users.find(el => el.email === stateAut.email && el.password === stateAut.password)
+        if (userAuth) {
+            setIsAuth(true)
             setErrorAut(false)
+            localStorage.setItem("user", JSON.stringify(userAuth))
             navCreate("/all-articles")
         } else {
             setErrorAut(true)
         }
     }
     const handleChangeAut = (e) => setStateAut((prevState) => ({...prevState, [e.target.name]: e.target.value}))
-    return (<div className={styles.wrapper}>
+
+    return (
+        <div className={styles.wrapper}>
             <h1 className={styles.h1}>Log in to your account</h1>
             <div className={styles.inform}>
                 <div className={styles.inform_el}>Email Address</div>
-                < input
+                <input
                     value={stateAut.email}
                     name="email"
                     className={styles.input}
@@ -35,20 +40,24 @@ export const AuthorizationUser = () => {
             </div>
             <div className={styles.inform}>
                 <div className={styles.inform_el}>Password</div>
-                < input
+                <input
                     value={stateAut.password}
                     name="password"
+                    type={"password"}
                     className={styles.input}
                     onChange={handleChangeAut}
                 />
             </div>
-            {errorAut&&<div>email already in use</div>}
-            <button className={styles.button} onClick={() => navCreate("/all-articles")}
-                    onClick={() => submitFormAut()}>SugIn Account
+            {errorAut&&<div className={styles.error}>User is not found</div>}
+            <button
+                className={styles.button}
+                onClick={() => submitFormAut()}
+            >
+                SugIn Account
             </button>
             <span className={styles.link}>Don’t have a Times account?
-           <NavLink to={"/registration"} className={styles.active}>Create one</NavLink>
-                   </span>
+                <NavLink to="/registration" className={styles.active}>Create one</NavLink>
+            </span>
         </div>
     )
 }

@@ -17,7 +17,7 @@ a{
 button{
     width: 113px;
     height: 47px;
-    font-family: 'IBM Plex Sans';
+    font-family: 'IBM Plex Sans',sans-serif;
     font-size: 16px;
     border: 1px solid #242424;
 }

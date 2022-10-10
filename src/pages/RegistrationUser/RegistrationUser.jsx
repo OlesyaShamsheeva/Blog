@@ -6,7 +6,7 @@ import {Menu, NavAction} from "../../components/Navbar";
 
 export const RegistrationUser = () => {
     const navigate = useNavigate()
-    const users = JSON.parse(localStorage.getItem("Users"))
+    const users = JSON.parse(localStorage.getItem("Users"))||[]
 
     const [error, setError] = useState(false)
     const [state, setState] = useState({
@@ -20,7 +20,7 @@ export const RegistrationUser = () => {
             const user = {...state, id: Date.now()}
             localStorage.setItem("Users", JSON.stringify([...users, user]))
             setError(false)
-            navigate("/all-articles")
+            navigate("/authorization")
         } else {
 setError(true)
         }
@@ -62,6 +62,7 @@ setError(true)
             < input
                 value={state.password}
                 name="password"
+                type={"password"}
                 className={styles.input}
                 onChange={handleChange}
             />

@@ -9,7 +9,8 @@ export const allArticles = [{
     text: " 1An Essay on Typography by Eric Gill takes the reader back to the year 1930. " +
         "The year when a conflict between two worlds came to its term. " +
         "The machines of the industrial world finally took over the handicrafts.",
-    user: "Janay Wright",
+    user: "Janna Fer",
+    userId: 1665405008064,
     data: "Jun 13 · 5 min read",
     url: first,
 }, {
@@ -19,7 +20,8 @@ export const allArticles = [{
     text: "2An Essay on Typography by Eric Gill takes the reader back to the year 1930. " +
         "The year when a conflict between two worlds came to its term. " +
         "The machines of the industrial world finally took over the handicrafts",
-    user: "Janay Wright",
+    user: "Lesya For",
+    userId: 1665405008064,
     data: "Jun 13 · 5 min read",
     url: two,
 }, {
@@ -29,7 +31,8 @@ export const allArticles = [{
     text: "3An Essay on Typography by Eric Gill takes the reader back to the year 1930. " +
         "The year when a conflict between two worlds came to its term. " +
         "The machines of the industrial world finally took over the handicrafts.",
-    user: "Janay Wright",
+    user: "Katya Fox",
+    userId: 1665405008064,
     data: "Jun 13 · 5 min read",
     url: three,
 }]

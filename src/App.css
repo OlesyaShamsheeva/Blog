@@ -2,12 +2,21 @@
   text-align: center;
 
 }
-a{
+
+a {
   cursor: pointer;
 }
-button{
+
+button {
   cursor: pointer;
 }
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -37,3 +46,4 @@ button{
     transform: rotate(360deg);
   }
 }
+

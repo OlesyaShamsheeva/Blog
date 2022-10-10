@@ -6,7 +6,7 @@ export const MainContainer = ({children}) => {
     return (
         <div className={styles.wrapper}>
             <Header/>
-            <main className={styles.main}>{children}</main>
+            <main className={`${styles.main} container`}>{children}</main>
             <Footer className={styles.footer}/>
         </div>)
 }

@@ -1,24 +1,9 @@
 
-.title{
-  font-family: 'Playfair Display',sans-serif;
+.title {
+  font-family: 'Playfair Display', sans-serif;
+  padding-top: 86px;
   font-weight: 700;
   font-size: 48px;
-text-align: start;
-  padding-left: 425px;
+  text-align: start;
 }
-.button{
-  width: 96px;
-  height: 47px;
-  background-color: white;
-  border: 1px solid #242424;
-  color: #8C8C8C;
-}
-.button:focus{
-  color: #242424;
 
-}
-.buttons{
-  padding-bottom: 110px;
-  display: flex;
-  justify-content: space-around;
-}

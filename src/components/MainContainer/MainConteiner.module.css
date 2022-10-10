@@ -1,12 +1,15 @@
-.wrapper{
+.wrapper {
   min-height: 100%;
-  display: flex;flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-.main{
-min-height: calc(100vh - (176px + 112px));
-
+.main {
+  min-height: calc(100vh - (176px + 112px));
+  padding-top: 80px;
+  padding-bottom: 100px;
 }
+
 .footer {
 }
 

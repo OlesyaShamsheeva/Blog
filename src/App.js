@@ -5,15 +5,19 @@ import {Route, Routes} from "react-router-dom";
 import {RegistrationUser} from "./pages/RegistrationUser";
 import {AuthorizationUser} from "./pages/AuthorizationUser";
 import {AllArticles} from "./pages/AllArticles/AllArticles";
+import {MyArticles} from "./pages/MyArticles";
 
 export const MyContext = createContext(null)
 
 function App() {
     const [isAuth, setIsAuth] = useState(false)
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
 
     const providerValues = {
         isAuth,
         setIsAuth,
+        user,
+        setUser,
     }
 
     return (
@@ -24,7 +28,7 @@ function App() {
                        <AllArticles/>
                     </MainContainer>}/>
                     <Route path='/my-articles' element={<MainContainer>
-                        <div>222</div>
+                      <MyArticles/>
                     </MainContainer>}/>
                     <Route path='/add-article' element={<MainContainer>
                         <div>333</div>

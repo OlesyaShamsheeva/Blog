@@ -1,27 +1,23 @@
-
 import {Article} from "../../components/Article/Article";
+import {Pagination} from "../../components/Pagination/Pagination";
 
 import {allArticles} from "../../mock";
-
 import styles from "./AllArticles.module.css"
 
 export const AllArticles = () => {
     const popularArticle = allArticles.reduce((result, article) => (
         result.viewCounter > article.viewCounter ? result : article
     ))
+    const filteredArticles = allArticles.filter((article) => article.id !== popularArticle.id)
 
     return (
-        <div>
+        <div >
             <Article isBigImg article={popularArticle}/>
             <h3 className={styles.title}>Popular Articles</h3>
-            {allArticles.filter( (article)=>article.id!==popularArticle.id).map(
-                (article) => (
+            {filteredArticles.map((article) => (
                 <Article key={article.id} article={article} />
             ))}
-            <div className={styles.buttons}>
-                <button className={styles.button}>Prev</button>
-                <button className={styles.button}>Next</button>
-            </div>
+          <Pagination/>
         </div>
     )
 }

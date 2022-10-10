@@ -1,0 +1,40 @@
+.profile{
+  width: 366px;
+  height: 320px;
+  background: #FBFBFB;
+  padding-top: 64px;
+  outline: 1px solid #F2F2F2; /* Ширина, вид и цвет рамки */
+  outline-offset: -10px; /* Выводим рамку внутри элемента */
+}
+.img{
+  width: 126px;
+  height: 126px;
+  border-radius: 50%;
+}
+.name{
+padding-top: 24px;
+  font-family: 'Playfair Display',sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  color: #242424;
+  padding-bottom: 16px;
+
+}
+.text{
+  width: 259px;
+  height: 40px;
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  padding-left: 43px;
+  padding-right: 43px;
+  color: #8C8C8C;
+}
+.myArticles{
+  display: flex;
+  flex-direction: row;
+gap:30px;
+}

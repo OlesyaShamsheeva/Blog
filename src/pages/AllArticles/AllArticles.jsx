@@ -1,17 +1,21 @@
 
-import styles from "./AllArticles.module.css"
-import {allArticles} from "../../mock";
 import {Article} from "../../components/Article/Article";
 
-export const AllArticles = ({}) => {
+import {allArticles} from "../../mock";
+
+import styles from "./AllArticles.module.css"
+
+export const AllArticles = () => {
     const popularArticle = allArticles.reduce((result, article) => (
         result.viewCounter > article.viewCounter ? result : article
     ))
+
     return (
         <div>
             <Article isBigImg article={popularArticle}/>
             <h3 className={styles.title}>Popular Articles</h3>
-            {allArticles.map((article) => (
+            {allArticles.filter( (article)=>article.id!==popularArticle.id).map(
+                (article) => (
                 <Article key={article.id} article={article} />
             ))}
             <div className={styles.buttons}>

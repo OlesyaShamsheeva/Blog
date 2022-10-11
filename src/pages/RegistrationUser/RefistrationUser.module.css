@@ -1,73 +1,46 @@
-.h1{
-
-  font-family: 'Playfair Display',sans-serif;
+.h1 {
+  font-family: 'Playfair Display', sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 36px;
   line-height: 56px;
   color: #242424;
   padding-top: 50px;
-
-
 }
-.inform{
+
+.wrapper {
   display: flex;
   flex-direction: column;
-  align-items: start;
-
-}
-
-  .input{
-    box-sizing: border-box;
-    width: 396px;
-    height: 47px;
-    border: 1px solid #8C8C8C;
-    margin-bottom: 32px;
-  }
-.inform_el{
-  font-family: 'IBM Plex Sans',sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 14px;
-  color: #242424;
-  padding-bottom: 12px;
-  padding-right: 32px;
-}
-.wrapper{
-  display: flex;
- flex-direction: column;
   align-items: center;
 }
-.button{
+
+.button {
   width: 396px;
   height: 55px;
   background: #242424;
-margin-bottom: 110px;
-  font-family: 'IBM Plex Sans',sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 15px;
-  /* identical to box height, or 94% */
-
-
   color: #FFFFFF;
 }
 
-.link{
+.link {
   padding-top: 24px;
-  padding-bottom:281px;
-  font-family: 'IBM Plex Sans',sans-serif;
+  padding-bottom: 281px;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
   line-height: 15px;
   color: #242424;
 }
-.active{
+
+.active {
   padding-top: 24px;
-  padding-bottom:281px;
-  font-family: 'IBM Plex Sans',sans-serif;
+  padding-bottom: 281px;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-style: normal;
   font-size: 16px;
   line-height: 15px;
@@ -75,7 +48,8 @@ margin-bottom: 110px;
   text-decoration-line: underline;
   font-weight: bold;
 }
-.error{
+
+.error {
   color: red;
   font-size: 18px;
 }

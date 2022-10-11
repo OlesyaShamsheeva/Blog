@@ -1,8 +1,9 @@
-import {useContext, useState} from "react";
+import {useContext} from "react";
 
 import {Logo} from "./Logo";
 import {Menu} from "./Menu";
 import {NavAction} from "./NavAction";
+
 import {MyContext} from "../../App";
 
 export const Navbar = ({logo,isHeader}) => {

@@ -1,16 +1,18 @@
+import {useContext} from "react";
+
+import {Pagination} from "../../components/Pagination";
+import {Article} from "../../components/Article/";
+
 import styles from "./MyArticles.module.css"
 import avatar from "../../assets/imgs/avatar.png"
 import {allArticles} from "../../mock";
-import {Article} from "../../components/Article/Article";
-import {useContext} from "react";
 import {MyContext} from "../../App";
-import {Pagination} from "../../components/Pagination/Pagination";
 
 export const MyArticles = () => {
     const { user } = useContext(MyContext)
+
     const userArticles = allArticles.filter((article) => article.userId === user.id)
 
-    console.log(userArticles)
     return (
         <div>
         <div className={styles.myArticles}>

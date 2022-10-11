@@ -1,9 +1,8 @@
-
-import styles from "./Menu.module.css"
 import {NavLink} from "react-router-dom";
 
-export const Menu = ({logOut, isHeader, }) => {
+import styles from "./Menu.module.css"
 
+export const Menu = ({logOut, isHeader}) => {
     const links = [
         {
             id: 1,
@@ -24,26 +23,27 @@ export const Menu = ({logOut, isHeader, }) => {
             id: 4,
             value: "Profile",
             path: "/profile"
-        },]
-
-    const Link = ({id, value, href}) => (
-        <NavLink
-            to={href}
-            className={(link) => link.isActive ? styles.active : ""}
-        >
-            {value}
-        </NavLink>
-    )
+        },
+    ]
 
     return (
         <div className={styles.wrapper}>
             <nav>
-                {links.map((link) => {
-                    return <Link key={link.id} value={link.value} href={link.path}/>
-                })}
+                {links.map((link) => (
+                    <NavLink
+                        key={link.id}
+                        to={link.path}
+                        className={(ref) => ref.isActive ? styles.active : ""}
+                    >
+                        {link.value}
+                    </NavLink>
+                ))}
             </nav>
-            <button onClick={() => logOut()}
-                    className={(isHeader) ? styles.header_button : styles.footer_button}>Logout
+            <button
+                onClick={() => logOut()}
+                className={(isHeader) ? styles.header_button : styles.footer_button}
+            >
+                Logout
             </button>
         </div>
     )

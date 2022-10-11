@@ -1,5 +1,5 @@
-import {Article} from "../../components/Article/Article";
-import {Pagination} from "../../components/Pagination/Pagination";
+import {Article} from "../../components/Article";
+import {Pagination} from "../../components/Pagination/";
 
 import {allArticles} from "../../mock";
 import styles from "./AllArticles.module.css"

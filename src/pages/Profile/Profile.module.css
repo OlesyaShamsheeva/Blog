@@ -1,0 +1,70 @@
+.caption{
+  margin-top: 0px;
+  font-family: 'Playfair Display',sans-serif;
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 56px;
+  text-align: start;
+  color: #242424;
+}
+.block{
+  display: flex;
+  flex-direction: row;
+}
+.formInput{
+  display: flex;
+  flex-direction: column;
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  color: #242424;
+  text-align: start;
+  gap:12px;
+}
+.inputBlock{
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+}
+.form{
+
+  padding-left: 40px;
+}
+.div{
+  padding-top: 32px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  color: #242424;
+  text-align: start;
+  gap:12px;
+}
+input{
+  width: 316px;
+  height: 47px;
+  border: 1px solid #E1E1E1;
+}
+textarea{
+  width: 664px;
+  height: 155px;
+  border: 1px solid #E1E1E1;
+
+}
+button{
+  display: flex;
+align-items: center;
+  justify-content: center;
+margin-top: 48px ;
+  width: 164px;
+  height: 48px;
+  background: #242424;
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16px;
+  color: #FFFFFF;
+}

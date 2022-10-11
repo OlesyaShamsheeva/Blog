@@ -49,7 +49,12 @@ export const RegistrationUser = () => {
     const submitForm = () => {
         const emailUser = users.find(el => el.email === state.email)
         if (!emailUser) {
-            const user = {...state, id: Date.now()}
+            const user = {
+                ...state,
+                id: Date.now(),
+                avatar: '',
+                description: '',
+            }
             localStorage.setItem("Users", JSON.stringify([...users, user]))
             setError(false)
             navigate("/authorization")

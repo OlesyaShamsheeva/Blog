@@ -1,9 +1,13 @@
+import {useNavigate} from "react-router-dom";
+
 import {ImgArticle} from "./imgArticle/ImgArticle";
 
 import glass from "../../assets/imgs/glass.png"
 import styles from "./Article.module.css"
 
+
 export const Article = ({article, isBigImg = false, isVertical = false}) => {
+    const navigate = useNavigate()
     return (
         <div className={`${styles.wrapper} ${isVertical ? styles.column : styles.row}`}>
             <div>
@@ -11,7 +15,7 @@ export const Article = ({article, isBigImg = false, isVertical = false}) => {
             </div>
             <div className={styles.informBlock}>
                 <span className={styles.tag}> #Typography </span>
-                <h4 className={styles.caption}>
+                <h4 className={styles.caption}  onClick={() =>navigate(`/article/${article.id}`)} >
                     {article.title}
                 </h4>
                 <div className={styles.text}>{article.text}</div>

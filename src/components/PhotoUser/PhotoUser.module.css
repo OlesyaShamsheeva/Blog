@@ -6,24 +6,11 @@
   outline: 1px solid #F2F2F2; /* Ширина, вид и цвет рамки */
   outline-offset: -10px; /* Выводим рамку внутри элемента */
 }
-
-.myArticles{
-  display: flex;
-  flex-direction: row;
-gap:30px;
-}
-.profile{
-  width: 366px;
-  height: 320px;
-  background: #FBFBFB;
-  padding-top: 64px;
-  outline: 1px solid #F2F2F2; /* Ширина, вид и цвет рамки */
-  outline-offset: -10px; /* Выводим рамку внутри элемента */
-}
 .img{
   width: 126px;
   height: 126px;
   border-radius: 50%;
+  background-color: #E5E5E5;
 }
 
 .name{

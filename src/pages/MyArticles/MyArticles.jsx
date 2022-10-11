@@ -7,6 +7,7 @@ import styles from "./MyArticles.module.css"
 import avatar from "../../assets/imgs/avatar.png"
 import {allArticles} from "../../mock";
 import {MyContext} from "../../App";
+import {NavLink} from "react-router-dom";
 
 export const MyArticles = () => {
     const { user } = useContext(MyContext)
@@ -25,7 +26,7 @@ export const MyArticles = () => {
             </div>
             <div>
                 {userArticles.map((article) => (
-                    <Article isVertical isBigImg key={article.id} article={article}  />
+                    <Article isVertical isBigImg key={article.id} article={article}/>
                 ))}
                 <Pagination/>
             </div>

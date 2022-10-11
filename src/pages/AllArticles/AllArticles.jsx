@@ -9,7 +9,6 @@ export const AllArticles = () => {
         result.viewCounter > article.viewCounter ? result : article
     ))
     const filteredArticles = allArticles.filter((article) => article.id !== popularArticle.id)
-
     return (
         <div >
             <Article isBigImg article={popularArticle}/>

@@ -51,7 +51,7 @@ export const AuthorizationUser = () => {
         <div className={styles.wrapper}>
             <h1 className={styles.h1}>Log in to your account</h1>
             {passwordFormInput.map((input) => (
-                <TextField key={input.name} input={input} onChange={handleChangeAut}/>
+                <TextField key={input.name} input={input} onChange={handleChangeAut} inputRegistr/>
             ))}
             {errorAut && <div className={styles.error}>User is not found</div>}
             <button

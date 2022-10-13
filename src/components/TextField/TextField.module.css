@@ -13,9 +13,16 @@
   padding-bottom: 12px;
 }
 
-.input {
+.inputReg {
   box-sizing: border-box;
   width: 396px;
+  height: 47px;
+  border: 1px solid #8C8C8C;
+  margin-bottom: 32px;
+}
+.inputChange {
+  box-sizing: border-box;
+  width: 316px;
   height: 47px;
   border: 1px solid #8C8C8C;
   margin-bottom: 32px;

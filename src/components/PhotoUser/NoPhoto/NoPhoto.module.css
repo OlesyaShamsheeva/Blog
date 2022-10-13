@@ -1,17 +1,25 @@
-.button{
-  width: 161px;
+.btn {
+  width: 164px;
   height: 48px;
   border: 1px solid #242424;
-  font-family: 'IBM Plex Sans',sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
   font-size: 16px;
-  line-height: 16px;
   color: #242424;
   background-color: white;
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 
 }
-.wrap{
+
+.inp {
+  opacity: 0;
+}
+
+.wrap {
   display: flex;
   flex-direction: column;
   align-items: center;

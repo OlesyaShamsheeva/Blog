@@ -5,11 +5,11 @@ import {MyContext} from "../../App";
 import {NoPhoto} from "./NoPhoto/NoPhoto";
 
 
-export const PhotoUser = ({children}) => {
+export const PhotoUser = ({photo, children}) => {
     const {user} = useContext(MyContext)
     return (
         <div className={styles.profile}>
-            <img src={user.avatar || noPhoto} className={styles.img} alt="avatar"/>
+            <img src={user?.avatar || photo || noPhoto} className={styles.img} alt="avatar"/>
             {children}
         </div>
     )

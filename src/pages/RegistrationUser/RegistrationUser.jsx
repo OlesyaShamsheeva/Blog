@@ -69,7 +69,7 @@ export const RegistrationUser = () => {
         <div className={styles.wrapper}>
             <h1 className={styles.h1}>Create your free account</h1>
             {registerFormInputs.map((input) => (
-                <TextField key={input.name} input={input} onChange={handleChange}/>
+                <TextField key={input.name} input={input} onChange={handleChange} inputRegistr/>
             ))}
             {error && <div className={styles.error}>email already in use</div>}
             <button

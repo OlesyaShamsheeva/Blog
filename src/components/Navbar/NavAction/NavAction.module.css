@@ -10,7 +10,7 @@
 .SignIn{
     width: 113px;
     height: 47px;
-    font-family: 'IBM Plex Sans';
+    font-family: 'IBM Plex Sans',sans-serif;
     font-size: 16px;
     border: 1px solid #242424;
     background: black;
@@ -19,17 +19,21 @@
 .button{
     display: flex; justify-content: space-around;
   gap: 24px;
+
 }
 .button_white{
   background-color: white;
   color: black;
+  margin-top: 0px;
 }
 .button_black{
   background-color: #242424;
   color: white;
+  margin-top: 0px;
 }
 .button_black_footer{
   background-color: #242424;
   color: white;
   border-color: white;
+  margin-top: 0px;
 }

@@ -2,6 +2,7 @@
 .wrapper{
   display: flex;justify-content: space-between;
   align-items: center;
+
 }
 a{
     padding: 16px;
@@ -14,7 +15,7 @@ a{
 .active{
     border-bottom: 1px solid black;
 }
-button{
+button{margin-top: 0px;
     width: 113px;
     height: 47px;
     font-family: 'IBM Plex Sans',sans-serif;
@@ -22,11 +23,15 @@ button{
     border: 1px solid #242424;
 }
 .header_button{
+  margin-left: 64px;
+  margin-top: 0px;
   background-color: #242424;
   color: white;
   border-color: black;
 }
 .footer_button{
+ margin-left: 64px;
+  margin-top: 0px;
   background-color: #242424;
   color: white;
   border-color: white;

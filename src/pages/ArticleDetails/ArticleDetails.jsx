@@ -12,9 +12,11 @@ export const ArticleDetails = ({isBigAvatar = false}) => {
   const {articleId} = useParams();
   const articles = JSON.parse(localStorage.getItem("Articles")) || []
   const article = articles.find(article => Number(articleId) === article.id)
+  const [counter,setCounter]=useState( useState(JSON.parse(localStorage.getItem('Articles'))))
   useEffect(() => {
     const addViewCounter=articles.map(el =>{ return el.id === Number(articleId) ? {...el, viewCounter: Number(el.viewCounter) + 1} : el})
     localStorage.setItem("Articles", JSON.stringify(addViewCounter))
+    setCounter(addViewCounter)
     }, [])
     return (
         <div className={styles.wrapper}>

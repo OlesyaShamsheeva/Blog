@@ -1,6 +1,6 @@
 import styles from "./ActivePhoto.module.css";
 
-export const ActivePhoto = ({ onChange, onDelete }) => {
+export const ActivePhoto = ({ onChange, onDelete, }) => {
     return(
         <div className={styles.buttonActive}>
           <div className={styles.wrap}>

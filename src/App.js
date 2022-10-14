@@ -14,15 +14,18 @@ export const MyContext = createContext(null)
 
 function App() {
   const [isAuth, setIsAuth] = useState(!!JSON.parse(localStorage.getItem('user')))
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
-  const [article,setArticle]=useState(JSON.parse(localStorage.getItem('article')))
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || [])
+  const [articles, setArticles] = useState(JSON.parse(localStorage.getItem("Articles")) || [])
+  const [counter,setCounter]=useState(JSON.parse(localStorage.getItem("Articles")) || [])
   const providerValues = {
     isAuth,
     setIsAuth,
     user,
     setUser,
-    article,
-    setArticle,
+    articles,
+    setArticles,
+    counter,
+    setCounter
   }
 
   return (

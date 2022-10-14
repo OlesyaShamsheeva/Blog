@@ -1,14 +1,20 @@
-import styles from "./Profile.module.css"
+import {MyContext} from "../../App";
+
 import {PhotoUser} from "../../components/PhotoUser";
 import {NoPhoto} from "../../components/PhotoUser/NoPhoto";
 import {ActivePhoto} from "../../components/PhotoUser/ActivePhoto";
 import {useContext, useState} from "react";
-import {MyContext} from "../../App";
 import {TextField} from "../../components/TextField";
+import {useParams} from "react-router-dom";
+import styles from "./Profile.module.css"
 
-export const Profile = ({inputRegistr = false}) => {
-  const {user, setUser} = useContext(MyContext)
+export const Profile = ( { inputRegistr = false} ) => {
+  const {articleId} = useParams();
+  const {user, setUser, setArticles} = useContext(MyContext)
+  const [article, setArticle] = useState(JSON.parse(localStorage.getItem('article')))
+
   const users = JSON.parse(localStorage.getItem("Users")) || []
+  const articles = JSON.parse(localStorage.getItem("Articles")) || []
   const [stateProf, setStateProf] = useState({
     firstName: user?.firstName || "",
     lastName: user?.lastName || "",
@@ -33,11 +39,24 @@ export const Profile = ({inputRegistr = false}) => {
   const changeUser = (e) => {
     e.preventDefault()
 
+    if (user.avatar !== stateProf.avatar) {
+      const changedArticles = articles.map((article) => {
+        if (article.userId !== articleId) {
+          return {...article, userAvatar: stateProf.avatar}
+        } else {
+          return article
+        }
+      })
+      console.log(changedArticles)
+      localStorage.setItem("Articles", JSON.stringify(changedArticles))
+      setArticles(changedArticles)
+    }
     const changedUser = {...user, ...stateProf}
-    const changedUsers = users.map((item) => item.id === changedUser.id ? changedUser : item)
+    const changedUsers = users.map((item) => item.id === changedUser.id ? {changedUser} : item)
     localStorage.setItem("user", JSON.stringify(changedUser))
     localStorage.setItem("Users", JSON.stringify(changedUsers))
     setUser(changedUser)
+
   }
 
   const convertBase64 = (file) =>
@@ -68,34 +87,34 @@ export const Profile = ({inputRegistr = false}) => {
   const handleDeleteImage = () => setStateProf((prevState) => ({...prevState, avatar: ''}))
 
   return (
-    <div>
-      <h3 className={styles.caption}>Profile</h3>
-      <div className={styles.block}>
-        <PhotoUser isBigAvatar photo={stateProf?.avatar}>
-          {stateProf?.avatar ?
-              <ActivePhoto onChange={handleImageChange} onDelete={handleDeleteImage}/>
-              :
-              <NoPhoto onChange={handleImageChange} />
-          }
-        </PhotoUser>
-        <form onSubmit={changeUser} className={styles.form}>
-          <div className={styles.inputChange}>
-            {inputProfile.map((input) =>
-              <TextField
-                key={input.label}
-                input={input}
-                onChange={handleChangeAut}
-                inputRegistr={false}
-              />
-            )}
-          </div>
-          <div className={styles.div}>
-            {stateProf?.description}
-            <textarea></textarea>
-          </div>
-          <button type="submit">Save Changes</button>
-        </form>
+      <div>
+        <h3 className={styles.caption}>Profile</h3>
+        <div className={styles.block}>
+          <PhotoUser isBigAvatar photo={stateProf?.avatar}>
+            {stateProf?.avatar ?
+                <ActivePhoto onChange={handleImageChange} onDelete={handleDeleteImage}/>
+                :
+                <NoPhoto onChange={handleImageChange}/>
+            }
+          </PhotoUser>
+          <form onSubmit={changeUser} className={styles.form}>
+            <div className={styles.inputChange}>
+              {inputProfile.map((input) =>
+                  <TextField
+                      key={input.label}
+                      input={input}
+                      onChange={handleChangeAut}
+                      inputRegistr={false}
+                  />
+              )}
+            </div>
+            <div className={styles.div}>
+              {stateProf?.description}
+              <textarea></textarea>
+            </div>
+            <button type="submit">Save Changes</button>
+          </form>
+        </div>
       </div>
-    </div>
   )
 }

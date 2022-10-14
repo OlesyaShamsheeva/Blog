@@ -34,8 +34,7 @@ export const Profile = ({inputRegistr = false}) => {
     e.preventDefault()
 
     const changedUser = {...user, ...stateProf}
-    const changedUsers = users.filter((item) => item.id === changedUser.id ? changedUser : item)
-
+    const changedUsers = users.map((item) => item.id === changedUser.id ? changedUser : item)
     localStorage.setItem("user", JSON.stringify(changedUser))
     localStorage.setItem("Users", JSON.stringify(changedUsers))
     setUser(changedUser)
@@ -72,7 +71,7 @@ export const Profile = ({inputRegistr = false}) => {
     <div>
       <h3 className={styles.caption}>Profile</h3>
       <div className={styles.block}>
-        <PhotoUser photo={stateProf?.avatar}>
+        <PhotoUser isBigAvatar photo={stateProf?.avatar}>
           {stateProf?.avatar ?
               <ActivePhoto onChange={handleImageChange} onDelete={handleDeleteImage}/>
               :

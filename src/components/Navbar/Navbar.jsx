@@ -13,6 +13,7 @@ export const Navbar = ({logo, isHeader}) => {
   const logOut = () => {
     setIsAuth(false)
     navigate("/all-articles")
+    localStorage.removeItem('user')
   }
 
   return (

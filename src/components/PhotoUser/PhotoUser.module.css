@@ -1,18 +1,21 @@
 .profile{
-  width: 366px;
-  height: 320px;
   background: #FBFBFB;
   padding-top: 64px;
-  outline: 1px solid #F2F2F2; /* Ширина, вид и цвет рамки */
-  outline-offset: -10px; /* Выводим рамку внутри элемента */
+  outline: 1px solid #F2F2F2;
+  outline-offset: -10px;
 }
-.img{
+.bigAvatar{
   width: 126px;
   height: 126px;
   border-radius: 50%;
   background-color: #E5E5E5;
 }
-
+.smallAvatar{
+  width: 48px;
+  height: 48px;
+  background-color: #FBFBFB;
+  border-radius:50%;
+}
 .name{
   padding-top: 24px;
   font-family: 'Playfair Display',sans-serif;
@@ -31,7 +34,5 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  padding-left: 43px;
-  padding-right: 43px;
   color: #8C8C8C;
 }

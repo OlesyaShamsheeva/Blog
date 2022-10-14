@@ -22,6 +22,7 @@ export const CreateArticle = ({ setFormData }) => {
 
       <div className={styles.editorAdd}>
         <Editor
+            editorStyle={{ height: "400px" }}
             wrapperClassName="wrapper-class"
             editorClassName="editor-class"
             toolbarClassName="toolbar-class"

@@ -6,6 +6,7 @@ import styles from "./AllArticles.module.css"
 
 export const AllArticles = () => {
   const articles = JSON.parse(localStorage.getItem("Articles")) || []
+  console.log(articles)
   const popularArticle = articles.reduce((result, article) => (
       result.viewCounter > article.viewCounter ? result : article
   ))

@@ -8,7 +8,7 @@ import styles from "./AuthorizationUser.module.css"
 
 export const AuthorizationUser = () => {
     const navCreate = useNavigate()
-    const {setIsAuth} = useContext(MyContext)
+    const {setIsAuth, setUser} = useContext(MyContext)
 
     const [errorAut, setErrorAut] = useState(false)
     const [stateAut, setStateAut] = useState({
@@ -23,6 +23,7 @@ export const AuthorizationUser = () => {
         if (userAuth) {
             setIsAuth(true)
             setErrorAut(false)
+            setUser(userAuth)
             localStorage.setItem("user", JSON.stringify(userAuth))
             navCreate("/all-articles")
         } else {

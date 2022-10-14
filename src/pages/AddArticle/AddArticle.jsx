@@ -4,8 +4,10 @@ import {CreateArticle} from "./CreateArticle";
 import {ArticleFile} from "./ArticleFile";
 
 import styles from "./AddArticle.module.css"
+import {useNavigate} from "react-router-dom";
 
 export const AddArticle = () => {
+  const navigate = useNavigate()
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
   const [formData, setFormData] = useState({
     title: "",
@@ -34,13 +36,16 @@ export const AddArticle = () => {
     const article = {
       ...formData,
       id: Date.now(),
-      viewCounter: "",
+      viewCounter:"",
       data: new Date().toLocaleString(),
       firstName: user.firstName,
       lastName: user.lastName,
       userId: user.id,
+      userAvatar: user.avatar,
     }
     localStorage.setItem("Articles", JSON.stringify([...articles, article]))
+
+    navigate("/all-articles")
   }
   console.log(formData)
   const handleGetEnter = (e) => setFormData((prevState) => ({...prevState, [e.target.name]: e.target.value}))

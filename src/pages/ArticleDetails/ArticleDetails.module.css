@@ -1,0 +1,119 @@
+.button{
+  width: 124px;
+  height: 47px;
+  background-color: white;
+  border: 1px solid #8C8C8C;
+  color: #8C8C8C;
+
+}
+.button:focus{
+  color: #242424;
+
+}
+.tagEl {
+  width: 100px;
+  height: 26px;
+  background: #F7F7F7;
+  border-radius: 118px;
+  text-align: center;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 26px;
+  color: #8C8C8C;
+}
+.wrapper{
+ display: flex;
+  justify-content: start;
+  gap: 73px;
+}
+.caption {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 459px;
+  height: 80px;
+  font-family: 'Playfair Display', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  color: #242424;
+  text-align: start;
+
+}
+.textContent{
+  padding-top: 32px;
+  width: 676px;
+  height: 416px;
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #8C8C8C;
+  text-align: justify;
+}
+.ava {
+  width: 72px;
+  height: 48px;
+}
+
+.inform {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 14px;
+}
+
+.name {
+  padding-top: 13px;
+  padding-bottom: 13px;
+  font-family: 'IBM Plex Sans Medium', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+  color: #8C8C8C;
+}
+
+.data {
+  padding-top: 13px;
+  padding-bottom: 13px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: #8C8C8C;
+}
+
+.view{
+  padding-top: 13px;
+  padding-bottom: 13px;
+  gap: 10px;
+  width: 29px;
+  height: 12px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: #8C8C8C;
+  display: flex;
+  flex-direction: row;
+}
+
+.icon {
+  width: 20px;
+  height: 14px;
+}
+.buttonTag{
+  width: 116px;
+  height: 36px;
+  background-color: white;
+  border: 1px solid #8C8C8C;
+  color: #8C8C8C;
+  font-size: 12px;
+
+}
+.wrap{
+  border-bottom: 1px solid #EBEBEB;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

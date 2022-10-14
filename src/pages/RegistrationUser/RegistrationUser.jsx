@@ -49,7 +49,12 @@ export const RegistrationUser = () => {
     const submitForm = () => {
         const emailUser = users.find(el => el.email === state.email)
         if (!emailUser) {
-            const user = {...state, id: Date.now()}
+            const user = {
+                ...state,
+                id: Date.now(),
+                avatar: '',
+                description: '',
+            }
             localStorage.setItem("Users", JSON.stringify([...users, user]))
             setError(false)
             navigate("/authorization")
@@ -64,7 +69,7 @@ export const RegistrationUser = () => {
         <div className={styles.wrapper}>
             <h1 className={styles.h1}>Create your free account</h1>
             {registerFormInputs.map((input) => (
-                <TextField key={input.name} input={input} onChange={handleChange}/>
+                <TextField key={input.name} input={input} onChange={handleChange} inputRegistr/>
             ))}
             {error && <div className={styles.error}>email already in use</div>}
             <button

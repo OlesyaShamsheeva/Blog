@@ -1,0 +1,38 @@
+.profile{
+  background: #FBFBFB;
+  padding-top: 64px;
+  outline: 1px solid #F2F2F2;
+  outline-offset: -10px;
+}
+.bigAvatar{
+  width: 126px;
+  height: 126px;
+  border-radius: 50%;
+  background-color: #E5E5E5;
+}
+.smallAvatar{
+  width: 48px;
+  height: 48px;
+  background-color: #FBFBFB;
+  border-radius:50%;
+}
+.name{
+  padding-top: 24px;
+  font-family: 'Playfair Display',sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  color: #242424;
+  padding-bottom: 16px;
+
+}
+.text{
+  width: 259px;
+  height: 40px;
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #8C8C8C;
+}

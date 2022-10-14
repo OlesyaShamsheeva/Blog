@@ -1,23 +1,38 @@
+import {useContext, useEffect, useState} from "react";
 import {Article} from "../../components/Article";
 import {Pagination} from "../../components/Pagination/";
 
-import {allArticles} from "../../mock";
+
 import styles from "./AllArticles.module.css"
+import {MyContext} from "../../App";
+import {NotArticles} from "../../components/Article/NoArticle";
+
 
 export const AllArticles = () => {
-    const popularArticle = allArticles.reduce((result, article) => (
-        result.viewCounter > article.viewCounter ? result : article
-    ))
-    const filteredArticles = allArticles.filter((article) => article.id !== popularArticle.id)
+  const {articles} = useContext(MyContext)
 
-    return (
-        <div >
-            <Article isBigImg article={popularArticle}/>
-            <h3 className={styles.title}>Popular Articles</h3>
-            {filteredArticles.map((article) => (
-                <Article key={article.id} article={article} />
-            ))}
-          <Pagination/>
-        </div>
-    )
+  const [popularArticle, setPopularArticle] = useState(null)
+
+  useEffect(() => {
+    if (articles) {
+      setPopularArticle(articles.reduce((result, article) =>
+          result.viewCounter > article.viewCounter ? result : article, {
+        viewCounter: -1
+      }))
+    }
+  }, [])
+
+
+  const filteredArticles = articles.filter((article) => article.id !== popularArticle?.id)
+  return (
+      <div>
+        {popularArticle?.viewCounter >= 0 && <Article isBigImg article={popularArticle}/>}
+        {(filteredArticles.length > 0)?<h3 className={styles.title}> Popular Articles</h3>:""}
+        {(filteredArticles.length > 0) ?
+            filteredArticles.map((article) => (<Article key={article.id} article={article}/>
+            )):<NotArticles/>}
+        {filteredArticles?.length > 0 && <Pagination/>}
+      </div>
+  )
 }
+

@@ -1,6 +1,7 @@
 .header {
-  padding: 32px 0;
   border-bottom: 1px solid #EBEBEB;
+  height: 94px;
+  padding: 32px 0px;
 }
 
 .headerWrap {

@@ -53,3 +53,7 @@
   color: red;
   font-size: 18px;
 }
+.errorvalid{
+  color: red;
+  font-weight: bold;
+}

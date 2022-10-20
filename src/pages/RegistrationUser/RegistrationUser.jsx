@@ -16,6 +16,7 @@ export const RegistrationUser = () => {
       emailAddress: "",
       password: "",
     },
+
     validationSchema: Yup.object({
       firstName: Yup.string()
           .min(2, "Must be at least 3 characters")
@@ -33,18 +34,19 @@ export const RegistrationUser = () => {
           .min(8, "Password is too short - should be 8 chars minimum.")
           .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
     }),
-
     onSubmit: (values) => {
+
       const emailUser = users.find(
           (el) => el.email === formik.initialValues.emailAddress
       );
       if (!emailUser) {
         const user = {
-          ...formik.initialValues,
+          ...users,
           id: Date.now(),
           avatar: "",
           description: "",
         };
+
         localStorage.setItem("Users", JSON.stringify([...users, user]));
         setError(false);
         navigate("/authorization");
@@ -53,7 +55,7 @@ export const RegistrationUser = () => {
       }
     },
   });
-
+console.log(formik.initialValues)
 
   const navigate = useNavigate();
   const [error, setError] = useState(false);

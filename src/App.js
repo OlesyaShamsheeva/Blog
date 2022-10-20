@@ -27,7 +27,6 @@ function App() {
     counter,
     setCounter
   }
-
   return (
       <MyContext.Provider value={providerValues}>
         <div className="App">

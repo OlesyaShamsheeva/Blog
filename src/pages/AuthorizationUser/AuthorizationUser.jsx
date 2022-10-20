@@ -9,34 +9,18 @@ import styles from "./AuthorizationUser.module.css"
 export const AuthorizationUser = () => {
   const navCreate = useNavigate()
   const {setIsAuth, setUser} = useContext(MyContext)
+  const users = JSON.parse(localStorage.getItem("Users")) || []
 
   const [errorAut, setErrorAut] = useState(false)
   const [stateAut, setStateAut] = useState({
-    email: '',
+    emailAddress: '',
     password: '',
   })
-
-  const users = JSON.parse(localStorage.getItem("Users")) || []
-
-  const submitFormAut = () => {
-    const userAuth = users.find(el => el.email === stateAut.email && el.password === stateAut.password)
-    if (userAuth) {
-      setIsAuth(true)
-      setErrorAut(false)
-      setUser(userAuth)
-      localStorage.setItem("user", JSON.stringify(userAuth))
-      navCreate("/all-articles")
-    } else {
-      setErrorAut(true)
-    }
-  }
-
-  const handleChangeAut = (e) => setStateAut((prevState) => ({...prevState, [e.target.name]: e.target.value}))
-
+console.log(stateAut)
   const passwordFormInput = [
     {
       label: "Email Address",
-      name: "email",
+      name: "emailAddress",
       type: "text",
       value: stateAut.email
     },
@@ -47,6 +31,18 @@ export const AuthorizationUser = () => {
       value: stateAut.password
     },
   ]
+  const handleChangeAut = (e) => setStateAut((prevState) => ({...prevState, [e.target.name]: e.target.value}))
+  const submitFormAut = () => {
+    const userAuth = users.find(el => el.emailAddress === stateAut.emailAddress && el.password === stateAut.password)
+    if (userAuth) {
+      setIsAuth(true)
+      setUser(userAuth)
+      localStorage.setItem("user", JSON.stringify(userAuth))
+      navCreate("/all-articles")
+    } else {
+      setErrorAut(true)
+    }
+  }
 
   return (
       <div className={styles.wrapper}>

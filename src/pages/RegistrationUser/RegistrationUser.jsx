@@ -35,13 +35,12 @@ export const RegistrationUser = () => {
           .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
     }),
     onSubmit: (values) => {
-
       const emailUser = users.find(
-          (el) => el.email === formik.initialValues.emailAddress
+          (el) => el.emailAddress === formik.values.emailAddress
       );
       if (!emailUser) {
         const user = {
-          ...users,
+          ...values,
           id: Date.now(),
           avatar: "",
           description: "",
@@ -55,7 +54,6 @@ export const RegistrationUser = () => {
       }
     },
   });
-console.log(formik.initialValues)
 
   const navigate = useNavigate();
   const [error, setError] = useState(false);
@@ -92,17 +90,16 @@ console.log(formik.initialValues)
         <h1 className={styles.h1}>Create your free account</h1>
         <form onSubmit={formik.handleSubmit}>
           {registerFormInputs.map((input) => (
-              <>
+              <div key={input.name}>
                 <TextField
-                    key={input.name}
                     input={input}
-                    onChange={(e) => formik.setFieldValue(input.name, e.target.value)}
+                    onChange={formik.handleChange}
                     value={formik.values[input.name]}
                     inputRegistr
                 />
                 {formik.touched[input.name] && formik.errors[input.name] ? (
                     <div className={styles.errorvalid}> {formik.errors [input.name]}</div>) : null}
-              </>
+              </div>
           ))}
           {error && <div className={styles.error}>email already in use</div>}
           <button

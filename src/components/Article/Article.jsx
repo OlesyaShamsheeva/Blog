@@ -7,6 +7,7 @@ import glass from "../../assets/imgs/glass.png"
 import styles from "./Article.module.css"
 
 
+
 export const Article = ({article, isBigImg = false, isVertical = false, isBigAvatar = false}) => {
   const navigate = useNavigate()
   if (!article) {

@@ -11,12 +11,16 @@ import {NavLink} from "react-router-dom";
 import {NotArticles} from "../../components/Article/NoArticle";
 import noPhoto from "../../assets/imgs/noPhoto.svg";
 import {PhotoUser} from "../../components/PhotoUser";
+import {registration} from "../../http/userApi";
 
 export const MyArticles = ({bigAvatar = false}) => {
   const {user} = useContext(MyContext)
   const articles = JSON.parse(localStorage.getItem("Articles")) || []
+
   const userArticles = articles.filter((article) => article.userId === user.id)
-  return (
+
+
+ return (
       <div>
         <div className={styles.myArticles}>
           <div className={styles.profile}>

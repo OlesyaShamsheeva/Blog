@@ -1,14 +1,12 @@
-import {useState} from "react";
-import {NavLink, useNavigate} from "react-router-dom";
-import {useFormik} from "formik";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
 import * as Yup from "yup";
-import {TextField} from "../../components/TextField";
-
-import styles from "./RegistrationUser.module.css"
-
+import { TextField } from "../../components/TextField";
+import { registration } from "../../http/userApi";
+import styles from "./RegistrationUser.module.css";
 export const RegistrationUser = () => {
   const users = JSON.parse(localStorage.getItem("Users")) || [];
-
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -16,7 +14,6 @@ export const RegistrationUser = () => {
       emailAddress: "",
       password: "",
     },
-
     validationSchema: Yup.object({
       firstName: Yup.string()
           .min(2, "Must be at least 3 characters")
@@ -34,30 +31,38 @@ export const RegistrationUser = () => {
           .min(8, "Password is too short - should be 8 chars minimum.")
           .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
     }),
-    onSubmit: (values) => {
-      const emailUser = users.find(
-          (el) => el.emailAddress === formik.values.emailAddress
-      );
-      if (!emailUser) {
-        const user = {
-          ...values,
-          id: Date.now(),
-          avatar: "",
-          description: "",
-        };
+    onSubmit: async (values) => {
+      try {
+        await registration(
+            formik.values.firstName,
+            formik.values.lastName,
+            formik.values.emailAddress,
+            formik.values.password,
+        );
 
-        localStorage.setItem("Users", JSON.stringify([...users, user]));
-        setError(false);
-        navigate("/authorization");
-      } else {
-        setError(true);
+        const emailUser = users.find(
+            (el) => el.emailAddress === formik.values.emailAddress
+        );
+        if (!emailUser) {
+          const user = {
+            ...values,
+            id: Date.now(),
+            avatar: "",
+            description: "",
+          };
+          localStorage.setItem("Users", JSON.stringify([...users, user]));
+          setError(false);
+          navigate("/authorization");
+        } else {
+          setError(true);
+        }
+      } catch (e) {
+        console.log(e);
       }
     },
   });
-
   const navigate = useNavigate();
   const [error, setError] = useState(false);
-
   const registerFormInputs = [
     {
       label: "First Name",
@@ -84,7 +89,6 @@ export const RegistrationUser = () => {
       value: "",
     },
   ];
-
   return (
       <div className={styles.wrapper}>
         <h1 className={styles.h1}>Create your free account</h1>
@@ -98,26 +102,37 @@ export const RegistrationUser = () => {
                     inputRegistr
                 />
                 {formik.touched[input.name] && formik.errors[input.name] ? (
-                    <div className={styles.errorvalid}> {formik.errors [input.name]}</div>) : null}
+                    <div className={styles.errorvalid}>
+                      {" "}
+                      {formik.errors[input.name]}
+                    </div>
+                ) : null}
               </div>
           ))}
           {error && <div className={styles.error}>email already in use</div>}
-          <button
-              className={styles.button}
-              type="submit"
-          >
+          <button className={styles.button} type="submit">
             Create Account
           </button>
         </form>
         <span className={styles.link}>
-            Do you have an account?
-            <NavLink to="/authorization" className={styles.active}>
-            SigIn Account
-            </NavLink>
-            </span>
+        Do you have an account?
+        <NavLink to="/authorization" className={styles.active}>
+          SigIn Account
+        </NavLink>
+      </span>
       </div>
   );
 };
+
+
+
+
+
+
+
+
+
+
 
 
 

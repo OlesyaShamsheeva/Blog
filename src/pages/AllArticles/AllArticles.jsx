@@ -8,10 +8,10 @@ import {Pagination} from "../../components/Pagination";
 
 
 
+
 export const AllArticles = () => {
   const {articles} = useContext(MyContext)
   const [popularArticle, setPopularArticle] = useState(null)
-
   useEffect(() => {
     if (articles) {
       setPopularArticle(articles.reduce((result, article) =>
@@ -24,7 +24,7 @@ export const AllArticles = () => {
 
   const filteredArticles = articles.filter((article) => article.id !== popularArticle?.id)
   return (
-      <div>
+      <div >
         {popularArticle?.viewCounter >= 0 && <Article isBigImg article={popularArticle}/>}
         {(filteredArticles.length > 0)?<h3 className={styles.title}> Popular Articles</h3>:""}
         {(filteredArticles.length > 0) ?

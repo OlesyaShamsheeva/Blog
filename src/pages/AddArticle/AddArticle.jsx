@@ -6,6 +6,7 @@ import {ArticleFile} from "./ArticleFile";
 import styles from "./AddArticle.module.css"
 import {useNavigate} from "react-router-dom";
 import {MyContext} from "../../App";
+import {addArticle} from "../../http/articleApi";
 
 export const AddArticle = () => {
   const navigate = useNavigate()
@@ -34,16 +35,23 @@ export const AddArticle = () => {
 
   const submitFormArticle = (e) => {
     e.preventDefault()
+
     const article = {
       ...formData,
       id: Date.now(),
-      viewCounter:"",
+      viewCounter:0,
       data: new Date().toLocaleString(),
       firstName: user.firstName,
       lastName: user.lastName,
       userId: user.id,
       userAvatar: user.avatar,
     }
+    console.log(new Date())    ;
+    addArticle({...article,
+      name: 'fff',
+      // viewCounter: 11,
+      data: new Date(),
+    }  )
     localStorage.setItem("Articles", JSON.stringify([...articles, article]))
     setArticles((prevState) => ([...prevState, article]))
     navigate("/all-articles")

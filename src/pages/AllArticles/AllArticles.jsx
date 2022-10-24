@@ -24,7 +24,7 @@ export const AllArticles = () => {
         viewCounter: -1
       }))
     }
-
+    console.log('hjefgjk');
     getAllArticles()
   }, [])
 

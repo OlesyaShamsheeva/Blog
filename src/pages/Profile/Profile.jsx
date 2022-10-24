@@ -6,7 +6,7 @@ import {useContext, useState, useEffect} from "react";
 import {TextField} from "../../components/TextField";
 import {useParams} from "react-router-dom";
 import styles from "./Profile.module.css"
-import {myProfile} from "../../http/userApi";
+import {deletePhoto, myProfile} from "../../http/userApi";
 import {updateProfile} from "../../http/userApi";
 
 export const Profile = ({inputRegistr = false}) => {
@@ -45,14 +45,10 @@ export const Profile = ({inputRegistr = false}) => {
           return article
         }
       })
-      // console.log(changedArticles)
-      // localStorage.setItem("Articles", JSON.stringify(changedArticles))
       setArticle(changedArticles)
     }
     const changedUser = {...user, ...stateProf}
     const changedUsers = users.map((item) => item.id === changedUser.id ? {changedUser} : item)
-    // localStorage.setItem("user", JSON.stringify(changedUser))
-    // localStorage.setItem("Users", JSON.stringify(changedUsers))
     setUser(changedUser)
   }
   const convertBase64 = (file) =>
@@ -77,7 +73,6 @@ export const Profile = ({inputRegistr = false}) => {
   }
 
   const handleChangeAut = (e) => setStateProf((prevState) => ({...prevState, [e.target.name]: e.target.value}))
-  const handleDeleteImage = () => setStateProf((prevState) => ({...prevState, avatar: ''}))
   useEffect(() => {
     const data = myProfile(user._id)
   }, [])
@@ -89,6 +84,11 @@ export const Profile = ({inputRegistr = false}) => {
       ...stateProf,
       userId: user._id
     })
+  }
+
+  const handleDeleteImage = () =>{
+    setStateProf((prevState) => ({...prevState, avatar: ''}))
+    deletePhoto(stateProf.avatar)
   }
   return (
       <div>

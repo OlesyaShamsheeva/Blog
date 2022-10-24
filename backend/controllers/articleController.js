@@ -1,8 +1,9 @@
 const Article = require("../models/Article")
 const errorHandler = require("../utils/errorHandler")
-module.exports.getAllArticles = (req, res) => {
+module.exports.getAllArticles = async (req, res) => {
+  console.log(23333)
   try {
-    const articles = Article.find({})
+    const articles = await Article.find({})
     console.log(articles)
     res.status(200).json(articles)
   } catch (e) {
@@ -10,6 +11,13 @@ module.exports.getAllArticles = (req, res) => {
   }
 }
 //получить все статьи
+
+module.exports.test = async (req, res) => {
+  console.log(req)
+  const articles = await Article.find({})
+  console.log(11111111)
+  console.log(articles)
+}
 
 
 module.exports.create = async (req, res) => {

@@ -39,6 +39,11 @@ export const updateProfile = async (data) => {
   return jwt_decode(data3.token);
   ;
 };
+export const deletePhoto = async (avatar) => {
+  const data3 = await authHost.delete(`api/user/image/`, avatar);
+  return jwt_decode(data3.token);
+  ;
+};
 
 
 

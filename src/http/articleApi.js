@@ -2,12 +2,26 @@ import { authHost, host } from "./index";
 import jwt_decode from "jwt-decode";
 
 //получить все статьи
-export const getAllArticles= async () => {
-  const data = await authHost.get("/api/article/allArticles");
-  return data;
-};
+export const getAllArticles = async () => {
+  console.log('dhjfdhjf');
+  const data = await authHost.get("http://localhost:5000/api/article/allArticles",{
+    headers: {
+       Authorization: JSON.parse(localStorage.getItem('userData')).token,
+      "content-type": "application/json"
+  }
+})}
 
 
+//
+// getUser: async (id) => {
+//   const {data} = await axios.get('http://localhost:5000/api/auth/get/' + id, {
+//     headers: {
+//       Authorization: JSON.parse(localStorage.getItem('userData')).token,
+//       "content-type": "application/json"
+//     }
+//   });
+//   return data;
+// },
 
 
 export const addArticle= async (
@@ -16,7 +30,7 @@ export const addArticle= async (
   const {data} = await authHost.post("/api/article/addArticle",{
    ...article
   });
-  localStorage.setItem("article", data.articleAdd);
+  localStorage.setItem("article", JSON.stringify(data.articleAdd));
   return data.articleAdd;
 
 };

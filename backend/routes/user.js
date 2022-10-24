@@ -11,6 +11,6 @@ router.get("/:userId/", passport.authenticate("jwt", {session: false}), controll
 
 //обновление картинок
 router.patch('/updateProfile/:id', passport.authenticate('jwt', {session: false}), upload.single('image'), controller.updateProfile)
-router.delete('/image/:id', passport.authenticate('jwt', {session: false}), upload.single('image'), controller.removeImage)
+router.delete('/image', passport.authenticate('jwt', {session: false}), upload.single('image'), controller.removeImage)
 //
 module.exports = router //экспорт нашего файла наружу

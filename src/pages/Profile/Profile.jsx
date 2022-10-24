@@ -1,25 +1,25 @@
 import {MyContext} from "../../App";
-
 import {PhotoUser} from "../../components/PhotoUser";
 import {NoPhoto} from "../../components/PhotoUser/NoPhoto";
 import {ActivePhoto} from "../../components/PhotoUser/ActivePhoto";
-import {useContext, useState} from "react";
+import {useContext, useState, useEffect} from "react";
 import {TextField} from "../../components/TextField";
 import {useParams} from "react-router-dom";
 import styles from "./Profile.module.css"
+import {myProfile} from "../../http/userApi";
+import {updateProfile} from "../../http/userApi";
 
-export const Profile = ( { inputRegistr = false} ) => {
+export const Profile = ({inputRegistr = false}) => {
   const {articleId} = useParams();
-  const {user, setUser, setArticles} = useContext(MyContext)
-  const [article, setArticle] = useState(JSON.parse(localStorage.getItem('article')))
-
+  const {user, setUser} = useContext(MyContext)
+  const [article, setArticle] = useState(MyContext)
   const users = JSON.parse(localStorage.getItem("Users")) || []
   const articles = JSON.parse(localStorage.getItem("Articles")) || []
   const [stateProf, setStateProf] = useState({
-    firstName: user?.firstName || "",
-    lastName: user?.lastName || "",
-    description: user?.description || "",
-    avatar: user?.avatar || '',
+    firstName: user?.firstName,
+    lastName: user?.lastName,
+    description: user?.description,
+    avatar: user?.avatar,
   })
   const inputProfile = [
     {
@@ -35,10 +35,8 @@ export const Profile = ( { inputRegistr = false} ) => {
       description: stateProf?.description,
     },
   ]
-
   const changeUser = (e) => {
     e.preventDefault()
-
     if (user.avatar !== stateProf.avatar) {
       const changedArticles = articles.map((article) => {
         if (article.userId !== articleId) {
@@ -47,18 +45,16 @@ export const Profile = ( { inputRegistr = false} ) => {
           return article
         }
       })
-      console.log(changedArticles)
-      localStorage.setItem("Articles", JSON.stringify(changedArticles))
-      setArticles(changedArticles)
+      // console.log(changedArticles)
+      // localStorage.setItem("Articles", JSON.stringify(changedArticles))
+      setArticle(changedArticles)
     }
     const changedUser = {...user, ...stateProf}
     const changedUsers = users.map((item) => item.id === changedUser.id ? {changedUser} : item)
-    localStorage.setItem("user", JSON.stringify(changedUser))
-    localStorage.setItem("Users", JSON.stringify(changedUsers))
+    // localStorage.setItem("user", JSON.stringify(changedUser))
+    // localStorage.setItem("Users", JSON.stringify(changedUsers))
     setUser(changedUser)
-
   }
-
   const convertBase64 = (file) =>
       new Promise((resolve, reject) => {
         const fileReader = new FileReader()
@@ -75,17 +71,25 @@ export const Profile = ( { inputRegistr = false} ) => {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
-
     reader.readAsDataURL(file)
     const base64 = await convertBase64(file)
     setStateProf((prevState) => ({...prevState, avatar: base64}))
   }
 
-
   const handleChangeAut = (e) => setStateProf((prevState) => ({...prevState, [e.target.name]: e.target.value}))
-
   const handleDeleteImage = () => setStateProf((prevState) => ({...prevState, avatar: ''}))
+  useEffect(() => {
+    const data = myProfile(user._id)
+  }, [])
 
+
+  const handleSubmit = () => {
+    console.log(user)
+    updateProfile({
+      ...stateProf,
+      userId: user._id
+    })
+  }
   return (
       <div>
         <h3 className={styles.caption}>Profile</h3>
@@ -112,9 +116,18 @@ export const Profile = ( { inputRegistr = false} ) => {
               {stateProf?.description}
               <textarea></textarea>
             </div>
-            <button type="submit">Save Changes</button>
+            <button type="submit" onClick={handleSubmit}>Save Changes</button>
           </form>
         </div>
       </div>
   )
 }
+
+
+
+
+
+
+
+
+

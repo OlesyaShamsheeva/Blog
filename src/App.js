@@ -13,17 +13,18 @@ import {AddArticle} from "./pages/AddArticle/AddArticle";
 export const MyContext = createContext(null)
 
 function App() {
-  const [isAuth, setIsAuth] = useState(!!JSON.parse(localStorage.getItem('user')))
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || [])
-  const [articles, setArticles] = useState(JSON.parse(localStorage.getItem("Articles")) || [])
-  const [counter,setCounter]=useState(JSON.parse(localStorage.getItem("Articles")) || [])
+  const [isAuth, setIsAuth] = useState(!!localStorage.getItem('token'))
+  const [user, setUser] = useState({})
+  console.log(user)
+  const [article, setArticle] = useState([])
+  const [counter,setCounter]=useState([])
   const providerValues = {
     isAuth,
     setIsAuth,
     user,
     setUser,
-    articles,
-    setArticles,
+    article,
+    setArticle,
     counter,
     setCounter
   }

@@ -4,7 +4,6 @@ const User = require('../models/User')
 const keys = require('../config/keys')
 const errorHandler=require("../utils/errorHandler")
 module.exports.authorization = async function (req, res) {
-  console.log(req)
   const candidate = await User.findOne({emailAddress: req.body.emailAddress})
   if (candidate) {
     // Проверка пароля, пользователь существует
@@ -16,7 +15,8 @@ module.exports.authorization = async function (req, res) {
         userId: candidate._id,
       }, keys.jwt, {expiresIn: 60 * 60})
       res.status(200).json({
-        token: `Bearer ${token}`
+        token: `Bearer ${token}`,
+        user: candidate
       })
     } else {
       // Пароли не совпали

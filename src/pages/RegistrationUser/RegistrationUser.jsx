@@ -1,116 +1,114 @@
-import {useState} from "react";
-import {NavLink, useNavigate} from "react-router-dom";
- import {useFormik} from "formik";
-import { Formik } from 'formik';
+import { NavLink, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { useState } from "react";
+import { useFormik } from "formik";
 
-import {TextField} from "../../components/TextField";
+import { TextField } from "../../components/TextField";
 
+import { registration} from "../../http/userApi";
 import styles from "./RefistrationUser.module.css"
 
-
 export const RegistrationUser = () => {
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
-      emailAddress: '',
+      firstName: "",
+      lastName: "",
+      emailAddress: "",
       password: "",
     },
     validationSchema: Yup.object({
-      firstName: Yup.string().min(2, 'Too Short!').max(15, "Must be 15 characters of less").required("Required!"),
-      lastName: Yup.string().min(2, 'Too Short!').max(20, "Must be 20 characters of less").required("Required!"),
-      emailAddress: Yup.string().email("Invalid email address").required("Required!"),
+      firstName: Yup.string()
+          .min(2, "Must be at least 3 characters")
+          .max(15, "Must be 15 characters of less")
+          .required("Required!"),
+      lastName: Yup.string()
+          .min(2, "Must be at least 3 characters")
+          .max(20, "Must be 20 characters of less")
+          .required("Required!"),
+      emailAddress: Yup.string()
+          .email("Invalid email address")
+          .required("Required!"),
       password: Yup.string()
-          .required('No password provided.')
-          .min(8, 'Password is too short - should be 8 chars minimum.')
-          .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.')
+          .required("No password provided.")
+          .min(8, "Password is too short - should be 8 chars minimum.")
+          .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
     }),
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-    }
-  })
+    onSubmit: async (values) => {
+        await registration(
+            formik.values.firstName,
+            formik.values.lastName,
+            formik.values.emailAddress,
+            formik.values.password,
+        ).then(
+            setError(false),
+        navigate("/authorization")
+        ).catch(
+            setError(true)
+        )
+    },
+  });
 
-  const navigate = useNavigate()
-
-  const [error, setError] = useState(false)
-
-
-  const users = JSON.parse(localStorage.getItem("Users")) || []
 
   const registerFormInputs = [
     {
       label: "First Name",
       name: "firstName",
       type: "text",
-      value: formik.initialValues.firstName
+      value: formik.values.firstName,
     },
     {
       label: "Last Name",
       name: "lastName",
       type: "text",
-      value: formik.initialValues.lastName
+      value:  formik.values.lastName,
     },
     {
       label: "Email Address",
-      name: " emailAddress",
+      name: "emailAddress",
       type: "text",
-      value: formik.initialValues.emailAddress
+      value:  formik.values.emailAddress,
     },
     {
       label: "Password",
-      name: "Password",
+      name: "password",
       type: "password",
-      value: formik.initialValues.password
+      value:  formik.values.password,
     },
-  ]
-  console.log(formik)
-  const submitForm = () => {
-    const emailUser = users.find(el => el.email === formik.initialValues.emailAddress)
-    if (!emailUser) {
-      const user = {
-        ...formik.initialValues,
-        id: Date.now(),
-        avatar: '',
-        description: '',
-      }
-      localStorage.setItem("Users", JSON.stringify([...users, user]))
-      setError(false)
-      navigate("/authorization")
-    } else {
-      setError(true)
-    }
-  }
-
-  const handleChange = (e) => ((prevState) => ({...prevState, [e.target.name]: e.target.value}))
-
-
-  ;
-
+  ];
   return (
       <div className={styles.wrapper}>
         <h1 className={styles.h1}>Create your free account</h1>
         <form onSubmit={formik.handleSubmit}>
           {registerFormInputs.map((input) => (
-              <TextField key={input.name} input={input} onChange={formik.handleChange} value={input.value} inputRegistr/>
+              <div key={input.name}>
+                <TextField
+                    input={input}
+                    onChange={formik.handleChange}
+                    value={formik.values[input.name]}
+                    inputRegistr
+                />
+                {formik.touched[input.name] && formik.errors[input.name] ? (
+                    <div className={styles.errorvalid}>
+                      {" "}
+                      {formik.errors[input.name]}
+                    </div>
+                ) : null}
+              </div>
           ))}
           {error && <div className={styles.error}>email already in use</div>}
-          <button
-              className={styles.button}
-              type="submit"
-              onClick={submitForm}
-          >
+          <button className={styles.button} type="submit">
             Create Account
           </button>
         </form>
         <span className={styles.link}>
-            Do you have an account?
-           <NavLink to="/authorization" className={styles.active}>
-               SigIn Account
-           </NavLink>
-        </span>
+        Do you have an account?
+        <NavLink to="/authorization" className={styles.active}>
+          SigIn Account
+        </NavLink>
+      </span>
       </div>
-  )
-}
-
+  );
+};
 

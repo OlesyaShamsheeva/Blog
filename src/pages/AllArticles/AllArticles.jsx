@@ -1,29 +1,36 @@
-import {useContext, useEffect, useState} from "react";
-import {Article} from "../../components/Article";
-import {Pagination} from "../../components/Pagination/";
 
-
-import styles from "./AllArticles.module.css"
 import {MyContext} from "../../App";
+import {useState,useEffect,useContext} from "react";
+
 import {NotArticles} from "../../components/Article/NoArticle";
 
+import {Pagination} from "../../components/Pagination";
+
+import {getAllArticles} from "../../http/articleApi"
+
+import styles from "./AllArticles.module.css"
+import {Article} from "../../components/Article";
 
 export const AllArticles = () => {
-  const {articles} = useContext(MyContext)
+  const [allState, setAllState] = useState([])
+  const [article,setArticle]=useState([])
 
   const [popularArticle, setPopularArticle] = useState(null)
 
   useEffect(() => {
-    if (articles) {
-      setPopularArticle(articles.reduce((result, article) =>
+    if (article) {
+      setPopularArticle(article.reduce((result, article) =>
           result.viewCounter > article.viewCounter ? result : article, {
         viewCounter: -1
       }))
     }
+
+    getAllArticles()
   }, [])
 
 
-  const filteredArticles = articles.filter((article) => article.id !== popularArticle?.id)
+
+  const filteredArticles = article.filter((article) => article.id !== popularArticle?.id)
   return (
       <div>
         {popularArticle?.viewCounter >= 0 && <Article isBigImg article={popularArticle}/>}

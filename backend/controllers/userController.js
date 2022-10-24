@@ -24,7 +24,6 @@ module.exports.removeUser = async function(req, res) {
 //изменение профиля
 module.exports.updateProfile = async function(req, res) {
   const updated = {
-    name: req.body.avatar,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     avatar: req.file ? req.file.path : '',

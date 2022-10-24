@@ -1,21 +1,22 @@
-import {useContext} from "react";
+import {MyContext} from "../../App";
+import {useContext,useEffect} from "react";
 
 import {Pagination} from "../../components/Pagination";
 import {Article} from "../../components/Article/";
-
-import styles from "./MyArticles.module.css"
-import avatar from "../../assets/imgs/avatar.png"
-import {allArticles} from "../../mock";
-import {MyContext} from "../../App";
-import {NavLink} from "react-router-dom";
 import {NotArticles} from "../../components/Article/NoArticle";
-import noPhoto from "../../assets/imgs/noPhoto.svg";
 import {PhotoUser} from "../../components/PhotoUser";
 
+import {myArticleId} from "../../http/articleApi";
+import styles from "./MyArticles.module.css"
+
 export const MyArticles = ({bigAvatar = false}) => {
-  const {user} = useContext(MyContext)
-  const articles = JSON.parse(localStorage.getItem("Articles")) || []
-  const userArticles = articles.filter((article) => article.userId === user.id)
+  const [article,setArticle]=useContext(MyContext)
+  const [user,setUser]=useContext(MyContext)
+
+  const userArticles = article.filter((article) => article.userId === user.id)
+  useEffect(() => {
+    const data =  myArticleId(user.id)
+  }, [])
   return (
       <div>
         <div className={styles.myArticles}>
@@ -33,8 +34,6 @@ export const MyArticles = ({bigAvatar = false}) => {
             {userArticles?.length > 0 && <Pagination/>}
           </div>
         </div>
-
       </div>
   )
-
 }

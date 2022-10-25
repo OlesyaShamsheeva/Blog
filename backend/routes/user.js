@@ -5,7 +5,7 @@ const passport = require("passport");
 const router = express.Router() //создаю роутер
 
 
-router.get("/:userId/", passport.authenticate("jwt", {session: false}), controller.getById)
+router.get("/", passport.authenticate("jwt", {session: false}), controller.getById)
 // router.delete('/:id', passport.authenticate('jwt', {session: false}), upload.single('image'), controller.removeUser)
 
 

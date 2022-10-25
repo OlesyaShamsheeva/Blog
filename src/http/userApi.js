@@ -27,22 +27,27 @@ export const authorization = async (emailAddress, password) => {
 };
 
 
-export const myProfile = async (userId) => {
-  const {data} = await authHost.get(`api/user/${userId}`);
-
-  return data.user;
+export const myProfile = async () => {
+  const {data} = await authHost.get(`api/user`);
+  return data;
 };
 
+//
+// export const updateProfile= async (
+//     user
+// ) => {
+//   const {data} = await authHost.patch(`api/user/updateProfile/${data.userId}`,{
+//     ...user
+//   });
+//   localStorage.setItem("user", JSON.stringify(data));
+//   return data;
+//
+// };
 
-export const updateProfile= async (
-    user
-) => {
-  const {data} = await authHost.patch(`api/user/updateProfile/${data.userId}`,{
-    ...user
-  });
-  localStorage.setItem("user", JSON.stringify(data.user));
-  return data.user;
 
+export const updateProfile= async (data) => {
+  const data3 = await authHost.patch(`api/user/updateProfile/${data._id}`, data);
+  return data3;
 };
 
 export const deletePhoto = async (avatar) => {
@@ -50,6 +55,7 @@ export const deletePhoto = async (avatar) => {
   return data3;
   ;
 };
+
 
 
 

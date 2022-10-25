@@ -1,11 +1,13 @@
 const User = require("../models/User")
 const errorHandler = require("../utils/errorHandler");
+const Article = require("../models/Article");
 //получить конкретного юзера
 module.exports.getById = async (req, res) => {
   try {
     const users = await User.find({
-      _id: req.params.id
+      _id: req.user._id
     })
+    res.status(200).json(users[0])
   } catch (e) {
     errorHandler(res, e)
   }
@@ -27,18 +29,39 @@ module.exports.updateProfile = async function(req, res) {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     avatar: req.file ? req.file.path : '',
+    description: req.body.description
   }
+
   try {
     const user = await User.findOneAndUpdate(
-        {id: req.params.id},
+        {id: req.params._id},
         {$set: updated},
-        {new: true}
     )
     res.status(200).json(user)
   } catch (e) {
     errorHandler(res, e)
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //удалить фотографию
 module.exports.removeImage = async function(req, res) {
   try {

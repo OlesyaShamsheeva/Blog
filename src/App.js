@@ -1,5 +1,5 @@
 import './App.css';
-import {createContext, useState} from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 import {MainContainer} from "./components/MainContainer/MainConteiner";
 import {Route, Routes} from "react-router-dom";
 import {RegistrationUser} from "./pages/RegistrationUser";
@@ -9,13 +9,14 @@ import {MyArticles} from "./pages/MyArticles";
 import {ArticleDetails} from "./pages/ArticleDetails";
 import {Profile} from "./pages/Profile";
 import {AddArticle} from "./pages/AddArticle/AddArticle";
+import {myProfile} from "./http/userApi";
 
 export const MyContext = createContext(null)
 
 function App() {
   const [isAuth, setIsAuth] = useState(!!localStorage.getItem('token'))
+  // const {user, setUser} = useContext(MyContext)
   const [user, setUser] = useState({})
-  console.log(user)
   const [article, setArticle] = useState([])
   const [counter,setCounter]=useState([])
   const providerValues = {
@@ -28,6 +29,12 @@ function App() {
     counter,
     setCounter
   }
+
+  useEffect(() => {
+    myProfile().then((res) => {
+      setUser(res)
+    })
+  }, [])
 
   return (
       <MyContext.Provider value={providerValues}>

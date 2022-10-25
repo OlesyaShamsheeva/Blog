@@ -1,17 +1,18 @@
 import {useContext, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 import {CreateArticle} from "./CreateArticle";
 import {ArticleFile} from "./ArticleFile";
 
-import styles from "./AddArticle.module.css"
-import {useNavigate} from "react-router-dom";
-import {MyContext} from "../../App";
 import {addArticle} from "../../http/articleApi";
+import {MyContext} from "../../App";
+import styles from "./AddArticle.module.css"
+
+
 
 export const AddArticle = () => {
   const navigate = useNavigate()
-  const {user,setUser}=useContext(MyContext)
-  const {article, setArticle} = useContext(MyContext)
+  const {user}=useContext(MyContext)
 
   const [formData, setFormData] = useState({
     title: "",
@@ -53,7 +54,7 @@ export const AddArticle = () => {
     } )
     navigate("/all-articles")
   }
-  console.log(formData)
+
   const handleGetEnter = (e) => setFormData((prevState) => ({...prevState, [e.target.name]: e.target.value}))
   return (
       <div>

@@ -1,45 +1,66 @@
-
-import {MyContext} from "../../App";
-import {useState,useEffect,useContext} from "react";
+import {useState, useEffect, useContext} from "react";
 
 import {NotArticles} from "../../components/Article/NoArticle";
-
 import {Pagination} from "../../components/Pagination";
-
-import {getAllArticles} from "../../http/articleApi"
-
-import styles from "./AllArticles.module.css"
 import {Article} from "../../components/Article";
 
-export const AllArticles = () => {
-  const [allState, setAllState] = useState([])
-  const [article,setArticle]=useState([])
+import {getAllArticles} from "../../http/articleApi";
+import {MyContext} from "../../App";
+import styles from "./AllArticles.module.css";
 
-  const [popularArticle, setPopularArticle] = useState(null)
+export const AllArticles = () => {
+  const {article, setArticle} = useContext(MyContext)
+
+  const [popularArticle, setPopularArticle] = useState(null);
+  const [state, setState] = useState([])
+
+  const handleGetArticles = async () => {
+    const {data} = await getAllArticles();
+    setArticle(data);
+    if (data) {
+      setPopularArticle(
+          data.reduce(
+              (result, article) =>
+                  result.viewCounter > article.viewCounter ? result : article,
+              {
+                viewCounter: -1,
+              }
+          )
+      );
+    }
+  };
 
   useEffect(() => {
-    if (article) {
-      setPopularArticle(article.reduce((result, article) =>
-          result.viewCounter > article.viewCounter ? result : article, {
-        viewCounter: -1
-      }))
+    handleGetArticles();
+  }, [] );
+
+  useEffect(() => {
+    if (article && popularArticle) {
+      const filtered = article.filter(
+          (article) => article._id !== popularArticle._id
+      );
+      setState(filtered)
     }
-    console.log('hjefgjk');
-    getAllArticles()
-  }, [])
+  }, [article, popularArticle]);
 
-
-
-  const filteredArticles = article.filter((article) => article.id !== popularArticle?.id)
   return (
       <div>
-        {popularArticle?.viewCounter >= 0 && <Article isBigImg article={popularArticle}/>}
-        {(filteredArticles.length > 0)?<h3 className={styles.title}> Popular Articles</h3>:""}
-        {(filteredArticles.length > 0) ?
-            filteredArticles.map((article) => (<Article key={article.id} article={article}/>
-            )):<NotArticles/>}
-        {filteredArticles?.length > 0 && <Pagination/>}
+        {popularArticle?.viewCounter >= 0 && (
+            <Article isBigImg article={popularArticle}/>
+        )}
+        {state.length > 0 ? (
+            <h3 className={styles.title}> Popular Articles</h3>
+        ) : (
+            ""
+        )}
+        {state.length > 0 ? (
+            state.map((article) => (
+                <Article key={article._id} article={article}/>
+            ))
+        ) : (
+            <NotArticles/>
+        )}
+        {state?.length > 0 && <Pagination/>}
       </div>
-  )
-}
+  );};
 

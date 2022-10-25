@@ -41,6 +41,10 @@ const articleSchema = new Schema({
   user:{
     ref:"users",
     type: Schema.Types.ObjectId
+  },
+  userId:{
+    type: String,
+    required:true
   }
 }) // создаем схему
 

@@ -12,7 +12,7 @@ export const Menu = ({logOut, isHeader}) => {
         {
             id: 2,
             value: "My articles",
-            path: "/my-articles"
+            path: "/my-articles/"
         },
         {
             id: 3,

@@ -1,35 +1,42 @@
-import { authHost, host } from "./index";
+import {authHost, host} from "./index";
 import jwt_decode from "jwt-decode";
 
-//получить все статьи
 export const getAllArticles = async () => {
-  console.log('dhjfdhjf');
-  const data = await authHost.get("http://localhost:5000/api/article/allArticles",{
+  const data = await authHost.get("http://localhost:5000/api/article/allArticles", {
     headers: {
-       Authorization: JSON.parse(localStorage.getItem('userData')).token,
+      Authorization: localStorage.getItem('token'),
       "content-type": "application/json"
-  }
-})}
+    }
+  })
+  return data
+}
 
-export const addArticle= async (
-   article
+export const addArticle = async (
+    article
 ) => {
-  const {data} = await authHost.post("/api/article/addArticle",{
-   ...article
+  const {data} = await authHost.post("/api/article/addArticle", {
+    ...article
   });
   localStorage.setItem("article", JSON.stringify(data.articleAdd));
   return data.articleAdd;
+};
 
+export const detailArticle = async (articleId) => {
+  const {data} = await authHost.get(`api/article/${articleId}`);
+  return data;
+};
+
+export const myArticleId = async (userId) => {
+  const {data} = await authHost.get(`api/article/${userId}`);
+  return data;
 };
 
 
-export const detailArticle= async (articleId) => {
-  const {data1} = await authHost.get(`api/article/${articleId}`);
-  return jwt_decode(data1.token);
+
+
+
+export const updateArticle = async (data) => {
+  const data3 = await authHost.patch(`api/article/${data._id}`, data);
+  return data3;
 };
 
-export const myArticleId= async (userId) => {
-  const {data1} = await authHost.get(`api/article/${userId}`);
-  console.log(data1.token)
-  return jwt_decode(data1.token);
-};

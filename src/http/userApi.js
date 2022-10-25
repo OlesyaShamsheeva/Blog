@@ -29,19 +29,25 @@ export const authorization = async (emailAddress, password) => {
 
 export const myProfile = async (userId) => {
   const {data} = await authHost.get(`api/user/${userId}`);
-  console.log(data.token)
-  return jwt_decode(data.token);
+
+  return data.user;
 };
 
 
-export const updateProfile = async (data) => {
-  const data3 = await authHost.patch(`api/user/updateProfile/${data.userId}`, data);
-  return jwt_decode(data3.token);
-  ;
+export const updateProfile= async (
+    user
+) => {
+  const {data} = await authHost.patch(`api/user/updateProfile/${data.userId}`,{
+    ...user
+  });
+  localStorage.setItem("user", JSON.stringify(data.user));
+  return data.user;
+
 };
+
 export const deletePhoto = async (avatar) => {
   const data3 = await authHost.delete(`api/user/image/`, avatar);
-  return jwt_decode(data3.token);
+  return data3;
   ;
 };
 

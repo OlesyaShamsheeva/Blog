@@ -8,6 +8,7 @@ import {useParams} from "react-router-dom";
 import styles from "./Profile.module.css"
 import {deletePhoto, myProfile} from "../../http/userApi";
 import {updateProfile} from "../../http/userApi";
+import {addArticle} from "../../http/articleApi";
 
 export const Profile = ({inputRegistr = false}) => {
   const {articleId} = useParams();
@@ -79,7 +80,6 @@ export const Profile = ({inputRegistr = false}) => {
 
 
   const handleSubmit = () => {
-    console.log(user)
     updateProfile({
       ...stateProf,
       userId: user._id

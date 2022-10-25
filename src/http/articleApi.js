@@ -11,19 +11,6 @@ export const getAllArticles = async () => {
   }
 })}
 
-
-//
-// getUser: async (id) => {
-//   const {data} = await axios.get('http://localhost:5000/api/auth/get/' + id, {
-//     headers: {
-//       Authorization: JSON.parse(localStorage.getItem('userData')).token,
-//       "content-type": "application/json"
-//     }
-//   });
-//   return data;
-// },
-
-
 export const addArticle= async (
    article
 ) => {

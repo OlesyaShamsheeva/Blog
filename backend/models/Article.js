@@ -35,8 +35,8 @@ const articleSchema = new Schema({
     required:true //обязательное поле
   },
   data:{
-    type: Date,
-    default: Date.now()
+    type: String,
+    default:  new Date().toLocaleString(),
   },
   user:{
     ref:"users",
@@ -45,6 +45,10 @@ const articleSchema = new Schema({
   userId:{
     type: String,
     required:true
+  },
+  imgArticle:{
+    type: String,
+    default:""
   }
 }) // создаем схему
 

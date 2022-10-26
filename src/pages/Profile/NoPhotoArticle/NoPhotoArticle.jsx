@@ -1,11 +1,11 @@
-import styles from './NoPhoto.module.css'
+import styles from '../NoPhotoArticle/NoPhotoArticle.module.css'
 
-export const NoPhoto = ({ onChange }) => {
+export const NoPhotoArticle = ({ onChange }) => {
   return (
     <div className={styles.wrap}>
       <input type="file" onChange={onChange} className={styles.inp} id="label"/>
       <label htmlFor="label" className={styles.btn}>
-        Upload photo
+        Loading img
       </label>
     </div>
   )

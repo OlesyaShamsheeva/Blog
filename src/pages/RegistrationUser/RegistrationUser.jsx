@@ -7,8 +7,9 @@ import * as Yup from 'yup';
 import { TextField } from '../../components/TextField';
 
 import { Routes } from '../../constants'
+import {Validation} from"../../constants"
 import { registration } from '../../http/userApi';
-import styles from './RefistrationUser.module.css'
+import styles from './RegistrationUser.module.css'
 
 export const RegistrationUser = () => {
   const [error, setError] = useState(false);
@@ -24,20 +25,20 @@ export const RegistrationUser = () => {
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
-        .min(2, 'Must be at least 3 characters')
-        .max(15, 'Must be 15 characters of less')
+        .min(3, Validation.MIN_LENGTH_3)
+        .max(15, Validation.MAX_LENGTH_15)
         .required('Required!'),
       lastName: Yup.string()
-        .min(2, 'Must be at least 3 characters')
-        .max(20, 'Must be 20 characters of less')
+        .min(3, Validation.MIN_LENGTH_3)
+        .max(15, Validation.MAX_LENGTH_15)
         .required('Required!'),
       emailAddress: Yup.string()
-        .email('Invalid email address')
+        .email(Validation.INVALID_EMAIL)
         .required('Required!'),
       password: Yup.string()
         .required('No password provided.')
-        .min(8, 'Password is too short - should be 8 chars minimum.')
-        .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+        .min(8,Validation.PASSWORD_MIN_LENGTH_8)
+        .matches(/[a-zA-Z]/,  Validation.PASSWORD_LETTERS),
     }),
     onSubmit: async (values) => {
       await registration(
@@ -95,7 +96,6 @@ export const RegistrationUser = () => {
             />
             {formik.touched[input.name] && formik.errors[input.name] ? (
               <div className={styles.errorvalid}>
-                {' '}
                 {formik.errors[input.name]}
               </div>
             ) : null}

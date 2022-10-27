@@ -12,7 +12,7 @@ export const Article = ({ article, isBigImg = false, isVertical = false, isBigAv
 
   return (
     <div className={`${styles.wrapper} ${isVertical ? styles.column : styles.row}`}>
-      <div>
+      <div className={styles.img}>
         <ImgArticle photo={article.imgArticle} isBigImg={isBigImg}/>
       </div>
       <div className={styles.informBlock}>

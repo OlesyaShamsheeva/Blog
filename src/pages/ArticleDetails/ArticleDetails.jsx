@@ -45,7 +45,7 @@ export const ArticleDetails = ({ isBigAvatar = false }) => {
         <h4 className={styles.caption}>
           {article.title}
         </h4>
-        <ImgArticle url={article.imgArticle} isBigImg/>
+        <ImgArticle photo={article.imgArticle} isBigImg/>
         <div className={styles.textContent}
              dangerouslySetInnerHTML={{ __html: article.description }}>
         </div>

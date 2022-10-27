@@ -4,6 +4,7 @@
   font-size: 48px;
   text-align: start;
 }
+
 .pag{
   width: 96px;
   height: 47px;
@@ -11,10 +12,11 @@
   border: 1px solid #242424;
   color: #8C8C8C;
 }
+
 .button:focus{
   color: #242424;
-
 }
+
 .pagBtn{
   display: flex;
   justify-content: space-between;

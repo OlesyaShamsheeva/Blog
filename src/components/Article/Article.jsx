@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { ImgArticle } from './imgArticle';
 import { PhotoUser } from '../PhotoUser';
 
+import { Routes } from '../../constants';
 import glass from '../../assets/imgs/glass.png'
 import styles from './Article.module.css'
-import { Routes } from '../../constants';
 
-export const Article = ({ article, isBigImg = false, isVertical = false, isBigAvatar = false }) => {
+
+export const Article = ( { article, isBigImg = false, isVertical = false, isBigAvatar = false } ) => {
   const navigate = useNavigate()
 
   return (
@@ -20,7 +21,7 @@ export const Article = ({ article, isBigImg = false, isVertical = false, isBigAv
           {article.category}
         </span>
         <h4 className={styles.caption}
-            onClick={() => navigate(Routes.ARTICLE_DETAIL.replace(/:[a-zA-Z?]+/g, article._id))}>
+            onClick={ () => navigate(Routes.ARTICLE_DETAIL.replace(/:[a-zA-Z?]+/g, article._id)) }>
           {article.title}
         </h4>
         <div className={styles.text}

@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 import { TextField } from '../../components/TextField';
 
 import { Routes } from '../../constants'
-import {Validation} from"../../constants"
+import { Validation } from '../../constants'
 import { registration } from '../../http/userApi';
 import styles from './RegistrationUser.module.css'
 
@@ -37,8 +37,8 @@ export const RegistrationUser = () => {
         .required('Required!'),
       password: Yup.string()
         .required('No password provided.')
-        .min(8,Validation.PASSWORD_MIN_LENGTH_8)
-        .matches(/[a-zA-Z]/,  Validation.PASSWORD_LETTERS),
+        .min(8, Validation.PASSWORD_MIN_LENGTH_8)
+        .matches(/[a-zA-Z]/, Validation.PASSWORD_LETTERS),
     }),
     onSubmit: async (values) => {
       await registration(

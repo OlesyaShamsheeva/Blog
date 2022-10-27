@@ -1,14 +1,14 @@
 import { useState, useEffect, useContext } from 'react';
 import { usePagination } from '../../hook/usePagination';
+
 import { NotArticles } from '../../components/Article/NoArticle';
-import { Pagination } from '../../components/Pagination';
 import { Article } from '../../components/Article';
 
 import { getAllArticles } from '../../http/articleApi';
 import { MyContext } from '../../App';
 import styles from './AllArticles.module.css';
 
-export const AllArticles = ({}) => {
+export const AllArticles = () => {
   const { article, setArticle } = useContext(MyContext)
 
   const [popularArticle, setPopularArticle] = useState(null);

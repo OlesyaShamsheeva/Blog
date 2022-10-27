@@ -3,6 +3,7 @@
     width:268px;
     height: 32px;
 }
+
 .logo:focus{
   cursor: pointer;
 }

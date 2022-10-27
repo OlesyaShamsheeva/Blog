@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 import { CreateArticle } from './CreateArticle';
 import { ArticleFile } from './ArticleFile';
-import { NoPhotoArticle } from '../Profile/NoPhotoArticle';
+import { PhotoArticle } from '../../components/PhotoArticle';
 
-import { addArticle } from '../../http/articleApi';
+import { addArticle, deletePhotoArticle } from '../../http/articleApi';
 
 import { MyContext } from '../../App';
-import {Routes} from "../../constants"
+import { Routes } from '../../constants'
 import styles from './AddArticle.module.css'
 
 export const AddArticle = () => {
@@ -70,18 +70,22 @@ export const AddArticle = () => {
     setFile(file)
     reader.readAsDataURL(file)
     const base64 = await convertBase64(file)
-    console.log(base64)
-    setArticle((prevState) => ({ ...prevState, imgArticle: base64 }))
+    setArticle((prevState) => ( { ...prevState, imgArticle: base64 } ))
   }
 
-  const handleGetEnter = (e) => setArticle((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
+  const handleGetEnter = (e) => setArticle((prevState) => ( { ...prevState, [e.target.name]: e.target.value } ))
+  const handleDeleteImage = (e) => {
+    e.preventDefault()
+    setArticle((prevState) => ({ ...prevState, imgArticle: '' }))
+    deletePhotoArticle(article.imgArticle)
+  }
 
   return (
     <div>
       <h1 className={styles.caption}>
         Add article
       </h1>
-      <form>
+      <form onSubmit={submitFormArticle}>
         <div className={styles.inputAdd}>
           {articleFormInputs.map((input) =>
             <ArticleFile
@@ -93,15 +97,19 @@ export const AddArticle = () => {
         </div>
         <CreateArticle
           setFormData={setArticle}/>
-        <NoPhotoArticle
+        <PhotoArticle
           onChange={handleImageChange}
+          onDelete={handleDeleteImage}
         />
         <div>
-          {file?.name}
+          <>
+            {article.imgArticle ?
+              file?.name : ''}
+          </>
         </div>
         <button
           className={styles.buttonPublish}
-          onClick={submitFormArticle}>
+          type="submit">
           Publish an article
         </button>
       </form>

@@ -6,9 +6,9 @@ import { Menu } from './Menu';
 import { NavAction } from './NavAction';
 
 import { MyContext } from '../../App';
-import {Routes} from "../../constants"
+import { Routes } from '../../constants'
 
-export const Navbar = ({ logo, isHeader }) => {
+export const Navbar = ( { logo, isHeader } ) => {
   const { isAuth, setIsAuth } = useContext(MyContext)
   const navigate = useNavigate()
 

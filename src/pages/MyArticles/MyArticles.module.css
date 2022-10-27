@@ -1,4 +1,4 @@
-.profile{
+.profile {
   width: 366px;
   height: 320px;
   background: #FBFBFB;
@@ -7,12 +7,13 @@
   outline-offset: -10px; /* Выводим рамку внутри элемента */
 }
 
-.myArticles{
+.myArticles {
   display: flex;
   flex-direction: row;
-gap:30px;
+  gap: 30px;
 }
-.profile{
+
+.profile {
   width: 366px;
   height: 320px;
   background: #FBFBFB;
@@ -20,27 +21,28 @@ gap:30px;
   outline: 1px solid #F2F2F2; /* Ширина, вид и цвет рамки */
   outline-offset: -10px; /* Выводим рамку внутри элемента */
 }
-.img{
+
+.img {
   width: 126px;
   height: 126px;
   border-radius: 50%;
 }
 
-.name{
+.name {
   padding-top: 24px;
-  font-family: 'Playfair Display',sans-serif;
+  font-family: 'Playfair Display', sans-serif;
   font-weight: 700;
   font-size: 24px;
   line-height: 24px;
   text-align: center;
   color: #242424;
   padding-bottom: 16px;
-
 }
-.text{
+
+.text {
   width: 259px;
   height: 40px;
-  font-family: 'IBM Plex Sans',sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
@@ -48,17 +50,20 @@ gap:30px;
   padding-right: 43px;
   color: #8C8C8C;
 }
-.pag{
+
+.pag {
   width: 96px;
   height: 47px;
   background-color: white;
   border: 1px solid #242424;
   color: #8C8C8C;
 }
-.button:focus{
+
+.button:focus {
   color: #242424;
 }
-.pagBtn{
+
+.pagBtn {
   display: flex;
   justify-content: space-between;
 }

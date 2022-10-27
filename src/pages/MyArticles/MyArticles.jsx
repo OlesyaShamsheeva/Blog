@@ -5,14 +5,15 @@ import { Article } from '../../components/Article/';
 import { NotArticles } from '../../components/Article/NoArticle';
 import { PhotoUser } from '../../components/PhotoUser';
 
-import { MyContext } from '../../App';
 import jwt_decode from 'jwt-decode';
+
+import { MyContext } from '../../App';
 import { myProfile } from '../../http/userApi';
 import { myArticleId } from '../../http/articleApi';
 import styles from './MyArticles.module.css'
 
 
-export const MyArticles = ({ bigAvatar = false }) => {
+export const MyArticles = ( { bigAvatar = false } ) => {
   const { article, setArticle } = useContext(MyContext)
   const { user, setUser } = useContext(MyContext)
 

@@ -1,4 +1,3 @@
-
 import { Navigate, Route, Routes as Switch } from 'react-router-dom';
 import { createContext, useState } from 'react';
 

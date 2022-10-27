@@ -79,8 +79,16 @@ module.exports.updateArticle = async function (req, res) {
 }
 
 
-
-
+module.exports.removeImageArt= async function(req, res) {
+  try {
+    await Article.remove({ imgArticle: req.params.imgArticle})
+    res.status(200).json({
+      message: 'фото  было удалено.'
+    })
+  } catch (e) {
+    errorHandler(res, e)
+  }
+}
 
 
 

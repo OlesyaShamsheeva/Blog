@@ -1,9 +1,9 @@
-import styles from "./NoArticle.module.css"
+import styles from './NoArticle.module.css'
 
 export const NotArticles = () => {
   return (
-      <div className={styles.textNo}>
-        Not Articles!
-      </div>
+    <div className={styles.textNo}>
+      Not Articles!
+    </div>
   )
 }

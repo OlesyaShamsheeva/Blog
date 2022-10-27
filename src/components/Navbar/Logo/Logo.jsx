@@ -4,8 +4,8 @@ import {Routes} from '../../../constants';
 import styles from './Logo.module.css'
 
 
-export const Logo = ({ logo }) => {
-  return <Link to={Routes.ALL_ARTICLES}>
-    <img src={logo} className={styles.logo} alt=""/>
+export const Logo = ( { logo } ) => {
+  return<Link to= {Routes.ALL_ARTICLES}>
+    <img src= { logo } className= { styles.logo } alt=""/>
   </Link>
 }

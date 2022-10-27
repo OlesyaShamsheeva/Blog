@@ -1,13 +1,13 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { TextField } from '../../components/TextField';
 
 import { authorization } from '../../http/userApi';
-import { MyContext } from '../../App';
-import styles from './AuthorizationUser.module.css'
 import { Routes } from '../../constants'
+import { MyContext } from '../../App';
 
+import styles from './AuthorizationUser.module.css'
 
 export const AuthorizationUser = () => {
   const navigate = useNavigate()
@@ -50,7 +50,9 @@ export const AuthorizationUser = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.h1}>Log in to your account</h1>
+      <h1 className={styles.h1}>
+        Log in to your account
+      </h1>
       {passwordFormInput.map((input) => (
         <TextField
           key={input.name}

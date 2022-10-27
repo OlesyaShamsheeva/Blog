@@ -38,7 +38,9 @@
   color: #242424;
   padding-bottom: 16px;
 }
-
+.lastName{
+  padding-left: 5px;
+}
 .text {
   width: 259px;
   height: 40px;
@@ -63,7 +65,3 @@
   color: #242424;
 }
 
-.pagBtn {
-  display: flex;
-  justify-content: space-between;
-}

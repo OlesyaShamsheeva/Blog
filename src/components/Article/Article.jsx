@@ -7,21 +7,20 @@ import { Routes } from '../../constants';
 import glass from '../../assets/imgs/glass.png'
 import styles from './Article.module.css'
 
-
-export const Article = ( { article, isBigImg = false, isVertical = false, isBigAvatar = false } ) => {
+export const Article = ({ article, isBigImg = false, isVertical = false, isBigAvatar = false }) => {
   const navigate = useNavigate()
 
   return (
     <div className={`${styles.wrapper} ${isVertical ? styles.column : styles.row}`}>
       <div>
-        <ImgArticle url={article.imgArticle} isBigImg={isBigImg}/>
+        <ImgArticle photo={article.imgArticle} isBigImg={isBigImg}/>
       </div>
       <div className={styles.informBlock}>
         <span className={styles.tag}>
           #{article.category}
         </span>
         <h4 className={styles.caption}
-            onClick={ () => navigate(Routes.ARTICLE_DETAIL.replace(/:[a-zA-Z?]+/g, article._id)) }>
+            onClick={() => navigate(Routes.ARTICLE_DETAIL.replace(/:[a-zA-Z?]+/g, article._id))}>
           {article.title}
         </h4>
         <div className={styles.text}

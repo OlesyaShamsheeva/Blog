@@ -1,4 +1,4 @@
-.button{
+.btn{
   width: 96px;
   height: 47px;
   background-color: white;
@@ -13,4 +13,11 @@
 .buttons{
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width: 1200px){
+  .buttons{
+    display: flex;
+    justify-content: space-around;
+  }
 }

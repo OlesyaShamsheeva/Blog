@@ -25,6 +25,7 @@
   flex-direction: column;
   justify-content: start;
   border-bottom: 1px solid #EBEBEB;
+  width: 680px;
 }
 
 .tag {
@@ -41,26 +42,27 @@
 }
 
 .caption {
-  margin-top: 24px;
-  margin-bottom: 16px;
   width: 459px;
-  height: 80px;
+  height: 32px;
+  padding-bottom: 16px;
+  padding-top: 32px;
   font-family: 'Playfair Display', sans-serif;
   font-weight: 700;
   font-size: 32px;
   line-height: 40px;
   color: #242424;
   text-align: start;
+  margin: 0px;
 }
 
 .text {
   text-align: start;
-  padding-bottom: 29px;
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 26px;
   color: #8C8C8C;
+  padding: 0px;
 }
 .ava {
   width: 72px;
@@ -112,4 +114,17 @@
 .icon {
   width: 20px;
   height: 14px;
+}
+
+@media (max-width: 1200px){
+  .wrapper{
+    max-width: 800px;
+  }
+  .informBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    border-bottom: 1px solid #EBEBEB;
+    width: 500px;
+  }
 }

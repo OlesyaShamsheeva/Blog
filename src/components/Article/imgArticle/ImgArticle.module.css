@@ -6,3 +6,44 @@
   width: 367px;
   height: 260px;
 }
+@media (max-width: 1200px){
+  .bigImg{
+    width: 350px;
+    height: 350px;
+  }
+  .smallImg{
+    width:280px;
+  }
+}
+@media (max-width: 1024px){
+  .bigImg{
+    width: 280px;
+    height: 280px;
+  }
+  .smallImg{
+    width:240px;
+    height: 240px;
+  }
+}
+
+@media (max-width: 1024px){
+  .bigImg{
+    width: 260px;
+    height: 280px;
+  }
+  .smallImg{
+    width:220px;
+    height: 240px;
+  }
+}
+
+@media (max-width: 780px){
+  .bigImg{
+    width: 260px;
+    height: 280px;
+  }
+  .smallImg{
+    width:220px;
+    height: 240px;
+  }
+}

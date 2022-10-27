@@ -27,31 +27,24 @@ export const RegistrationUser = () => {
       firstName: Yup.string()
         .min(3, Validation.MIN_LENGTH_3)
         .max(15, Validation.MAX_LENGTH_15)
-        .required('Required!'),
+        .required(Validation.REQUIRED),
       lastName: Yup.string()
         .min(3, Validation.MIN_LENGTH_3)
         .max(15, Validation.MAX_LENGTH_15)
-        .required('Required!'),
+        .required(Validation.REQUIRED),
       emailAddress: Yup.string()
         .email(Validation.INVALID_EMAIL)
-        .required('Required!'),
+        .required(Validation.REQUIRED),
       password: Yup.string()
-        .required('No password provided.')
+        .required(Validation.REQUIRED)
         .min(8, Validation.PASSWORD_MIN_LENGTH_8)
         .matches(/[a-zA-Z]/, Validation.PASSWORD_LETTERS),
     }),
-    onSubmit: async (values) => {
-      await registration(
-        formik.values.firstName,
-        formik.values.lastName,
-        formik.values.emailAddress,
-        formik.values.password,
-      ).then(
-        setError(false),
-        navigate(Routes.AUTHORIZATION)
-      ).catch(
-        setError(true)
-      )
+    onSubmit: (values) => {
+      registration(values).then(() => {
+          setError(false)
+          navigate(Routes.AUTHORIZATION)
+      }).catch(() => setError(true))
     },
   });
 

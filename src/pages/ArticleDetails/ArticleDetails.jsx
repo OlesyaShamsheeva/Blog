@@ -11,7 +11,7 @@ import { Routes } from '../../constants'
 import styles from './ArticleDetails.module.css'
 import glass from '../../assets/imgs/glass.png';
 
-export const ArticleDetails = ( { isBigAvatar = false } ) => {
+export const ArticleDetails = ({ isBigAvatar = false }) => {
   const navigate = useNavigate()
 
   const { articleId } = useParams()
@@ -35,7 +35,7 @@ export const ArticleDetails = ( { isBigAvatar = false } ) => {
   return (
     <div className={styles.wrapper}>
       <button className={styles.button}
-              onClick={ () => navigate(Routes.ALL_ARTICLES) }>
+              onClick={() => navigate(Routes.ALL_ARTICLES)}>
         All articles
       </button>
       <div>
@@ -47,15 +47,15 @@ export const ArticleDetails = ( { isBigAvatar = false } ) => {
         </h4>
         <ImgArticle url={article.imgArticle} isBigImg/>
         <div className={styles.textContent}
-             dangerouslySetInnerHTML={ { __html: article.description } }>
+             dangerouslySetInnerHTML={{ __html: article.description }}>
         </div>
         <div className={styles.wrap}>
           <div className={styles.inform}>
             <PhotoUser photo={article.userAvatar}
                        isBigAvatar={isBigAvatar}/>
             <span className={styles.name}>
-              {article.firstName}
-              {article.lastName}
+              <span>{article.firstName}</span>
+              <span className={styles.lastName}>{article.lastName}</span>
                     </span>
             <span className={styles.data}>
               {article.data}

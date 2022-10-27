@@ -12,7 +12,6 @@ const articleRoutes = require("./routes/article")
 const userRoutes = require("./routes/user")
 const keys = require('./config/keys')
 const app = express()
-
 mongoose.connect(keys.mongoURI)
     .then(() => console.log('MongoDB connected.'))
     .catch(error => console.log(error))
@@ -28,7 +27,6 @@ app.use(require('cors')())
 app.use("/api/auth", authRoutes) //метод который добавляет роуты плагины и прочее.    будет адрес после /api/auth/login
 app.use("/api/article", articleRoutes)
 app.use("/api/user", userRoutes)
-
 module.exports = app
 
 

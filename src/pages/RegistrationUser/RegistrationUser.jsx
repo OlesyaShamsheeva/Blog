@@ -1,91 +1,114 @@
-import {useState} from "react";
-import {NavLink, useNavigate} from "react-router-dom";
+import { NavLink, useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+import { useState } from 'react';
+import { useFormik } from 'formik';
 
-import {TextField} from "../../components/TextField";
+import { TextField } from '../../components/TextField';
 
-import styles from "./RefistrationUser.module.css"
-
+import { registration } from '../../http/userApi';
+import styles from './RefistrationUser.module.css'
 
 export const RegistrationUser = () => {
-    const navigate = useNavigate()
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      emailAddress: '',
+      password: '',
+    },
+    validationSchema: Yup.object({
+      firstName: Yup.string()
+        .min(2, 'Must be at least 3 characters')
+        .max(15, 'Must be 15 characters of less')
+        .required('Required!'),
+      lastName: Yup.string()
+        .min(2, 'Must be at least 3 characters')
+        .max(20, 'Must be 20 characters of less')
+        .required('Required!'),
+      emailAddress: Yup.string()
+        .email('Invalid email address')
+        .required('Required!'),
+      password: Yup.string()
+        .required('No password provided.')
+        .min(8, 'Password is too short - should be 8 chars minimum.')
+        .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+    }),
+    onSubmit: async (values) => {
+      await registration(
+        formik.values.firstName,
+        formik.values.lastName,
+        formik.values.emailAddress,
+        formik.values.password,
+      ).then(
+        setError(false),
+        navigate('/authorization')
+      ).catch(
+        setError(true)
+      )
+    },
+  });
 
-    const [error, setError] = useState(false)
-    const [state, setState] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: '',
-    })
 
-    const users = JSON.parse(localStorage.getItem("Users")) || []
-
-    const registerFormInputs = [
-        {
-            label: "First Name",
-            name: "firstName",
-            type: "text",
-            value: state.firstName
-        },
-        {
-            label: "Last Name",
-            name: "lastName",
-            type: "text",
-            value: state.lastName
-        },
-        {
-            label: "Email Address",
-            name: "email",
-            type: "text",
-            value: state.email
-        },
-        {
-            label: "Password",
-            name: "password",
-            type: "password",
-            value: state.password
-        },
-    ]
-
-    const submitForm = () => {
-        const emailUser = users.find(el => el.email === state.email)
-        if (!emailUser) {
-            const user = {
-                ...state,
-                id: Date.now(),
-                avatar: '',
-                description: '',
-            }
-            localStorage.setItem("Users", JSON.stringify([...users, user]))
-            setError(false)
-            navigate("/authorization")
-        } else {
-            setError(true)
-        }
-    }
-
-    const handleChange = (e) => setState((prevState) => ({...prevState, [e.target.name]: e.target.value}))
-
-    return (
-        <div className={styles.wrapper}>
-            <h1 className={styles.h1}>Create your free account</h1>
-            {registerFormInputs.map((input) => (
-                <TextField key={input.name} input={input} onChange={handleChange} inputRegistr/>
-            ))}
-            {error && <div className={styles.error}>email already in use</div>}
-            <button
-                className={styles.button}
-                onClick={submitForm}
-            >
-                Create Account
-            </button>
-            <span className={styles.link}>
-            Do you have an account?
-           <NavLink to="/authorization" className={styles.active}>
-               SigIn Account
-           </NavLink>
-        </span>
-        </div>
-    )
-}
-
+  const registerFormInputs = [
+    {
+      label: 'First Name',
+      name: 'firstName',
+      type: 'text',
+      value: formik.values.firstName,
+    },
+    {
+      label: 'Last Name',
+      name: 'lastName',
+      type: 'text',
+      value: formik.values.lastName,
+    },
+    {
+      label: 'Email Address',
+      name: 'emailAddress',
+      type: 'text',
+      value: formik.values.emailAddress,
+    },
+    {
+      label: 'Password',
+      name: 'password',
+      type: 'password',
+      value: formik.values.password,
+    },
+  ];
+  return (
+    <div className={styles.wrapper}>
+      <h1 className={styles.h1}>Create your free account</h1>
+      <form onSubmit={formik.handleSubmit}>
+        {registerFormInputs.map((input) => (
+          <div key={input.name}>
+            <TextField
+              input={input}
+              onChange={formik.handleChange}
+              value={formik.values[input.name]}
+              inputRegistr
+            />
+            {formik.touched[input.name] && formik.errors[input.name] ? (
+              <div className={styles.errorvalid}>
+                {' '}
+                {formik.errors[input.name]}
+              </div>
+            ) : null}
+          </div>
+        ))}
+        {error && <div className={styles.error}>email already in use</div>}
+        <button className={styles.button} type="submit">
+          Create Account
+        </button>
+      </form>
+      <span className={styles.link}>
+        Do you have an account?
+        <NavLink to="/authorization" className={styles.active}>
+         Login Account
+        </NavLink>
+      </span>
+    </div>
+  );
+};
 

@@ -1,120 +1,126 @@
-import {MyContext} from "../../App";
+import { useContext, useEffect } from 'react';
 
-import {PhotoUser} from "../../components/PhotoUser";
-import {NoPhoto} from "../../components/PhotoUser/NoPhoto";
-import {ActivePhoto} from "../../components/PhotoUser/ActivePhoto";
-import {useContext, useState} from "react";
-import {TextField} from "../../components/TextField";
-import {useParams} from "react-router-dom";
-import styles from "./Profile.module.css"
 
-export const Profile = ( { inputRegistr = false} ) => {
-  const {articleId} = useParams();
-  const {user, setUser, setArticles} = useContext(MyContext)
-  const [article, setArticle] = useState(JSON.parse(localStorage.getItem('article')))
+import { PhotoUser } from '../../components/PhotoUser';
+import { NoPhoto } from '../../components/PhotoUser/NoPhoto';
+import { ActivePhoto } from '../../components/PhotoUser/ActivePhoto';
 
-  const users = JSON.parse(localStorage.getItem("Users")) || []
-  const articles = JSON.parse(localStorage.getItem("Articles")) || []
-  const [stateProf, setStateProf] = useState({
-    firstName: user?.firstName || "",
-    lastName: user?.lastName || "",
-    description: user?.description || "",
-    avatar: user?.avatar || '',
-  })
+import { TextField } from '../../components/TextField';
+import jwt_decode from 'jwt-decode';
+
+import { MyContext } from '../../App';
+import { deletePhoto, myProfile } from '../../http/userApi';
+import { updateProfile } from '../../http/userApi';
+import styles from './Profile.module.css'
+
+export const Profile = ({ inputRegistr = false }) => {
+
+
+  const { user, setUser } = useContext(MyContext)
+
+
   const inputProfile = [
     {
-      label: "First Name",
-      name: "firstName",
-      value: stateProf?.firstName,
-      description: stateProf?.description,
+      label: 'First Name',
+      name: 'firstName',
+      value: user.firstName,
+      description: user.description,
     },
     {
-      label: "Last Name",
-      name: "lastName",
-      value: stateProf?.lastName,
-      description: stateProf?.description,
+      label: 'Last Name',
+      name: 'lastName',
+      value: user.lastName,
+      description: user.description,
     },
   ]
 
-  const changeUser = (e) => {
-    e.preventDefault()
-
-    if (user.avatar !== stateProf.avatar) {
-      const changedArticles = articles.map((article) => {
-        if (article.userId !== articleId) {
-          return {...article, userAvatar: stateProf.avatar}
-        } else {
-          return article
-        }
-      })
-      console.log(changedArticles)
-      localStorage.setItem("Articles", JSON.stringify(changedArticles))
-      setArticles(changedArticles)
-    }
-    const changedUser = {...user, ...stateProf}
-    const changedUsers = users.map((item) => item.id === changedUser.id ? {changedUser} : item)
-    localStorage.setItem("user", JSON.stringify(changedUser))
-    localStorage.setItem("Users", JSON.stringify(changedUsers))
-    setUser(changedUser)
-
-  }
-
   const convertBase64 = (file) =>
-      new Promise((resolve, reject) => {
-        const fileReader = new FileReader()
-        fileReader.readAsDataURL(file)
-        fileReader.onload = () => {
-          resolve(fileReader.result)
-        }
-        fileReader.onerror = (error) => {
-          reject(error)
-        }
-      })
+    new Promise((resolve, reject) => {
+      const fileReader = new FileReader()
+      fileReader.readAsDataURL(file)
+      fileReader.onload = () => {
+        resolve(fileReader.result)
+      }
+      fileReader.onerror = (error) => {
+        reject(error)
+      }
+    })
 
   async function handleImageChange(e) {
     e.preventDefault();
     let reader = new FileReader();
     let file = e.target.files[0];
-
+    console.log(file)
     reader.readAsDataURL(file)
     const base64 = await convertBase64(file)
-    setStateProf((prevState) => ({...prevState, avatar: base64}))
+    setUser((prevState) => ({ ...prevState, avatar: base64 }))
   }
 
+  const handleChangeAut = (e) => setUser((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
 
-  const handleChangeAut = (e) => setStateProf((prevState) => ({...prevState, [e.target.name]: e.target.value}))
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(user)
+    updateProfile({
+      avatar: user.avatar,
+      description: user.description,
+      emailAddress: user.emailAddress,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      name: '',
+      password: user.password,
+      __v: user.__v,
+      _id: user._id
+    })
+  }
+  const handleDeleteImage = () => {
+    setUser((prevState) => ({ ...prevState, avatar: '' }))
+    deletePhoto(user.avatar)
+  }
 
-  const handleDeleteImage = () => setStateProf((prevState) => ({...prevState, avatar: ''}))
+  useEffect(() => {
+    const { userId } = jwt_decode(localStorage.getItem('token').slice(7))
+    myProfile(userId).then((res) => setUser(res))
+  }, [])
 
   return (
-      <div>
-        <h3 className={styles.caption}>Profile</h3>
-        <div className={styles.block}>
-          <PhotoUser isBigAvatar photo={stateProf?.avatar}>
-            {stateProf?.avatar ?
-                <ActivePhoto onChange={handleImageChange} onDelete={handleDeleteImage}/>
-                :
-                <NoPhoto onChange={handleImageChange}/>
-            }
-          </PhotoUser>
-          <form onSubmit={changeUser} className={styles.form}>
-            <div className={styles.inputChange}>
-              {inputProfile.map((input) =>
-                  <TextField
-                      key={input.label}
-                      input={input}
-                      onChange={handleChangeAut}
-                      inputRegistr={false}
-                  />
-              )}
-            </div>
-            <div className={styles.div}>
-              {stateProf?.description}
-              <textarea></textarea>
-            </div>
-            <button type="submit">Save Changes</button>
-          </form>
-        </div>
+    <div>
+      <h3 className={styles.caption}>Profile</h3>
+      <div className={styles.block}>
+        <PhotoUser isBigAvatar photo={user.avatar}>
+          {user.avatar ?
+            <ActivePhoto onChange={handleImageChange} onDelete={handleDeleteImage}/>
+            :
+            <NoPhoto onChange={handleImageChange}/>
+          }
+        </PhotoUser>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.inputChange}>
+            {inputProfile.map((input) =>
+              <TextField
+                key={input.label}
+                input={input}
+                onChange={handleChangeAut}
+                inputRegistr={false}
+              />
+            )}
+          </div>
+          <div className={styles.div}>
+              <textarea onChange={handleChangeAut} value={user.description} onChange={(e) => {
+                setUser({ ...user, description: e.target.value })
+              }}/>
+          </div>
+          <button type="submit">Save Changes</button>
+        </form>
       </div>
+    </div>
   )
 }
+
+
+
+
+
+
+
+

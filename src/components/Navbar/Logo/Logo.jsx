@@ -1,13 +1,12 @@
+import { useNavigate } from 'react-router-dom';
+import styles from './Logo.module.css'
 
-import {useNavigate} from "react-router-dom";
-import styles from "./Logo.module.css"
-
-export const Logo = ({logo}) => {
+export const Logo = ({ logo }) => {
   const navigate = useNavigate()
   const goMainPage = () => {
-    navigate("/all-articles")
+    navigate('/all-articles')
   }
-  return <div>
+  return <a>
     <img onClick={goMainPage} src={logo} className={styles.logo} alt=""/>
-  </div>
+  </a>
 }

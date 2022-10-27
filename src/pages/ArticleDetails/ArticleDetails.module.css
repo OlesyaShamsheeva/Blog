@@ -10,7 +10,7 @@
   color: #242424;
 
 }
-.tagEl {
+.tagEl{
   width: 100px;
   height: 26px;
   background: #F7F7F7;
@@ -41,7 +41,6 @@
 
 }
 .textContent{
-  padding-top: 32px;
   width: 676px;
   height: 416px;
   font-family: 'IBM Plex Sans',sans-serif;
@@ -57,15 +56,14 @@
 }
 
 .inform {
+  margin: 0px;
   display: flex;
   flex-direction: row;
-  justify-content: start;
-  gap: 14px;
+  justify-content: space-around;
+  gap:30px;
 }
 
 .name {
-  padding-top: 13px;
-  padding-bottom: 13px;
   font-family: 'IBM Plex Sans Medium', sans-serif;
   font-weight: 500;
   font-size: 14px;
@@ -74,8 +72,6 @@
 }
 
 .data {
-  padding-top: 13px;
-  padding-bottom: 13px;
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
   font-size: 12px;
@@ -84,8 +80,6 @@
 }
 
 .view{
-  padding-top: 13px;
-  padding-bottom: 13px;
   gap: 10px;
   width: 29px;
   height: 12px;
@@ -103,17 +97,17 @@
   height: 14px;
 }
 .buttonTag{
+  margin-top: 0px;
   width: 116px;
   height: 36px;
   background-color: white;
   border: 1px solid #8C8C8C;
   color: #8C8C8C;
   font-size: 12px;
-
 }
 .wrap{
   border-bottom: 1px solid #EBEBEB;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }

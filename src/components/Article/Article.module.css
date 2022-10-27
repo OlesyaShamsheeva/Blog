@@ -73,6 +73,7 @@
   flex-direction: row;
   justify-content: start;
   gap: 14px;
+  width: 440px;
 }
 
 .name {

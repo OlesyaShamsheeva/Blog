@@ -18,7 +18,7 @@ export const Article = ( { article, isBigImg = false, isVertical = false, isBigA
       </div>
       <div className={styles.informBlock}>
         <span className={styles.tag}>
-          {article.category}
+          #{article.category}
         </span>
         <h4 className={styles.caption}
             onClick={ () => navigate(Routes.ARTICLE_DETAIL.replace(/:[a-zA-Z?]+/g, article._id)) }>

@@ -30,14 +30,14 @@
 .tag {
   width: 100px;
   height: 26px;
-  background: #F7F7F7;
+  background-color: #CFCFCF;
+  color: #FBFBFB;
   border-radius: 118px;
   text-align: center;
   font-family: 'Inter', sans-serif;
   font-weight: 400;
   font-size: 12px;
   line-height: 26px;
-  color: #8C8C8C;
 }
 
 .caption {
@@ -62,7 +62,6 @@
   line-height: 26px;
   color: #8C8C8C;
 }
-
 .ava {
   width: 72px;
   height: 48px;
@@ -73,7 +72,6 @@
   flex-direction: row;
   justify-content: start;
   gap: 14px;
-  width: 440px;
 }
 
 .name {

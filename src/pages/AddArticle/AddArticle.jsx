@@ -3,14 +3,17 @@ import { useNavigate } from 'react-router-dom';
 
 import { CreateArticle } from './CreateArticle';
 import { ArticleFile } from './ArticleFile';
+import { NoPhotoArticle } from '../Profile/NoPhotoArticle';
 
 import { addArticle } from '../../http/articleApi';
+
 import { MyContext } from '../../App';
+import {Routes} from "../../constants"
 import styles from './AddArticle.module.css'
-import { NoPhotoArticle } from '../Profile/NoPhotoArticle/NoPhotoArticle';
 
 export const AddArticle = () => {
   const navigate = useNavigate()
+
   const { user } = useContext(MyContext)
   const { article, setArticle } = useContext(MyContext)
   const [file, setFile] = useState(null)
@@ -45,7 +48,7 @@ export const AddArticle = () => {
       viewCounter: 0,
       data: new Date().toLocaleString(),
     })
-    navigate('/all-articles')
+    navigate(Routes.ALL_ARTICLES)
   }
 
   const convertBase64 = (file) =>
@@ -62,7 +65,6 @@ export const AddArticle = () => {
 
   async function handleImageChange(e) {
     e.preventDefault();
-    console.log(e)
     let reader = new FileReader();
     let file = e.target.files[0];
     setFile(file)

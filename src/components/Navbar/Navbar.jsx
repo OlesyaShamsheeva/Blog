@@ -1,18 +1,20 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Logo } from './Logo';
 import { Menu } from './Menu';
 import { NavAction } from './NavAction';
 
 import { MyContext } from '../../App';
-import { useNavigate } from 'react-router-dom';
+import {Routes} from "../../constants"
 
 export const Navbar = ({ logo, isHeader }) => {
   const { isAuth, setIsAuth } = useContext(MyContext)
   const navigate = useNavigate()
+
   const logOut = () => {
     setIsAuth(false)
-    navigate('/all-articles')
+    navigate(Routes.ALL_ARTICLES)
     localStorage.removeItem('token')
   }
 

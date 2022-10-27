@@ -1,16 +1,20 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import * as Yup from 'yup';
 import { useState } from 'react';
 import { useFormik } from 'formik';
 
+import * as Yup from 'yup';
+
 import { TextField } from '../../components/TextField';
 
+import { Routes } from '../../constants'
 import { registration } from '../../http/userApi';
 import styles from './RefistrationUser.module.css'
 
 export const RegistrationUser = () => {
   const [error, setError] = useState(false);
+
   const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -43,13 +47,12 @@ export const RegistrationUser = () => {
         formik.values.password,
       ).then(
         setError(false),
-        navigate('/authorization')
+        navigate(Routes.AUTHORIZATION)
       ).catch(
         setError(true)
       )
     },
   });
-
 
   const registerFormInputs = [
     {
@@ -77,6 +80,7 @@ export const RegistrationUser = () => {
       value: formik.values.password,
     },
   ];
+
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.h1}>Create your free account</h1>
@@ -97,14 +101,16 @@ export const RegistrationUser = () => {
             ) : null}
           </div>
         ))}
-        {error && <div className={styles.error}>email already in use</div>}
+        {error && <div className={styles.error}>
+          email already in use
+        </div>}
         <button className={styles.button} type="submit">
           Create Account
         </button>
       </form>
       <span className={styles.link}>
         Do you have an account?
-        <NavLink to="/authorization" className={styles.active}>
+        <NavLink to={Routes.AUTHORIZATION} className={styles.active}>
          Login Account
         </NavLink>
       </span>

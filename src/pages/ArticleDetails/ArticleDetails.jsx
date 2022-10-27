@@ -1,30 +1,30 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { ImgArticle } from '../../components/Article/imgArticle/ImgArticle';
+import { ImgArticle } from '../../components/Article/imgArticle';
 import { PhotoUser } from '../../components/PhotoUser';
 
-import { myArticleId, updateArticle } from '../../http/articleApi';
+import { Routes } from "../../constants"
+import { updateArticle } from '../../http/articleApi';
 import { detailArticle } from '../../http/articleApi';
 import styles from './ArticleDetails.module.css'
 import glass from '../../assets/imgs/glass.png';
-import { NoPhotoArticle } from '../Profile/NoPhotoArticle/NoPhotoArticle';
 
 export const ArticleDetails = ({ isBigAvatar = false }) => {
   const navigate = useNavigate()
+
   const { articleId } = useParams()
+
   const [article, setArticle] = useState({})
 
   useEffect(() => {
     detailArticle(articleId).then((res) => {
-      console.log(res)
       const updatedArticle = {
         ...res,
         viewCounter: Number(res.viewCounter) + 1
       }
       updateArticle(updatedArticle)
       setArticle(updatedArticle)
-      console.log(article)
     })
   }, [])
   if (!article) {
@@ -34,7 +34,7 @@ export const ArticleDetails = ({ isBigAvatar = false }) => {
   return (
     <div className={styles.wrapper}>
       <button className={styles.button}
-              onClick={() => navigate('/all-articles')}>
+              onClick={() => navigate(Routes.ALL_ARTICLES)}>
         All articles
       </button>
       <div>

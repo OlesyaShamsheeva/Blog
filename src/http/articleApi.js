@@ -1,4 +1,4 @@
-import { authHost, host } from './index';
+import { authHost} from './index';
 
 export const getAllArticles = async () => {
   const data = await authHost.get('http://localhost:5000/api/article/allArticles', {
@@ -33,5 +33,11 @@ export const myArticleId = async (userId) => {
 export const updateArticle = async (data) => {
   const data3 = await authHost.patch(`api/article/${data._id}`, data);
   return data3;
+};
+
+export const deletePhotoArticle = async (imgArticle) => {
+  const data = await authHost.delete(`api/article/imgArt/`, imgArticle);
+  return data;
+  ;
 };
 

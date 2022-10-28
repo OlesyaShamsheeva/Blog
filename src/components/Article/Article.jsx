@@ -1,28 +1,26 @@
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
 
-import { ImgArticle } from './imgArticle/ImgArticle';
-import { PhotoUser } from '../../components/PhotoUser';
+import { ImgArticle } from './imgArticle';
+import { PhotoUser } from '../PhotoUser';
 
-import { MyContext } from '../../App';
+import { Routes } from '../../constants';
 import glass from '../../assets/imgs/glass.png'
 import styles from './Article.module.css'
 
 export const Article = ({ article, isBigImg = false, isVertical = false, isBigAvatar = false }) => {
-  const { user, setUser } = useContext(MyContext)
   const navigate = useNavigate()
 
   return (
     <div className={`${styles.wrapper} ${isVertical ? styles.column : styles.row}`}>
-      <div>
-        <ImgArticle url={article.imgArticle} isBigImg={isBigImg}/>
+      <div className={styles.img}>
+        <ImgArticle photo={article.imgArticle} isBigImg={isBigImg}/>
       </div>
       <div className={styles.informBlock}>
         <span className={styles.tag}>
-          {article.category}
+          #{article.category}
         </span>
         <h4 className={styles.caption}
-            onClick={() => navigate(`/article/${article._id}`)}>
+            onClick={() => navigate(Routes.ARTICLE_DETAIL.replace(/:[a-zA-Z?]+/g, article._id))}>
           {article.title}
         </h4>
         <div className={styles.text}
@@ -32,7 +30,7 @@ export const Article = ({ article, isBigImg = false, isVertical = false, isBigAv
                      isBigAvatar={isBigAvatar}/>
           <span className={styles.name}>
               {article.firstName}
-         <span> {article.lastName}</span>
+            <span> {article.lastName}</span>
             </span>
           <span className={styles.data}>
               {article.data}

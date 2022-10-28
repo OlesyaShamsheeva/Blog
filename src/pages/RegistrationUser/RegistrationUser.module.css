@@ -49,7 +49,11 @@
   font-weight: bold;
 }
 
-.error {
+.errorvalid {
+  color: red;
+  font-size: 18px;
+}
+.error{
   color: red;
   font-size: 18px;
 }

@@ -3,14 +3,17 @@ import { useNavigate } from 'react-router-dom';
 
 import { CreateArticle } from './CreateArticle';
 import { ArticleFile } from './ArticleFile';
+import { PhotoArticle } from '../../components/PhotoArticle';
 
-import { addArticle } from '../../http/articleApi';
+import { addArticle, deletePhotoArticle } from '../../http/articleApi';
+
 import { MyContext } from '../../App';
+import { Routes } from '../../constants'
 import styles from './AddArticle.module.css'
-import { NoPhotoArticle } from '../Profile/NoPhotoArticle/NoPhotoArticle';
 
 export const AddArticle = () => {
   const navigate = useNavigate()
+
   const { user } = useContext(MyContext)
   const { article, setArticle } = useContext(MyContext)
   const [file, setFile] = useState(null)
@@ -45,7 +48,7 @@ export const AddArticle = () => {
       viewCounter: 0,
       data: new Date().toLocaleString(),
     })
-    navigate('/all-articles')
+    navigate(Routes.ALL_ARTICLES)
   }
 
   const convertBase64 = (file) =>
@@ -62,24 +65,27 @@ export const AddArticle = () => {
 
   async function handleImageChange(e) {
     e.preventDefault();
-    console.log(e)
     let reader = new FileReader();
     let file = e.target.files[0];
     setFile(file)
     reader.readAsDataURL(file)
     const base64 = await convertBase64(file)
-    console.log(base64)
-    setArticle((prevState) => ({ ...prevState, imgArticle: base64 }))
+    setArticle((prevState) => ( { ...prevState, imgArticle: base64 } ))
   }
 
-  const handleGetEnter = (e) => setArticle((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
+  const handleGetEnter = (e) => setArticle((prevState) => ( { ...prevState, [e.target.name]: e.target.value } ))
+  const handleDeleteImage = (e) => {
+    e.preventDefault()
+    setArticle((prevState) => ({ ...prevState, imgArticle: '' }))
+    deletePhotoArticle(article.imgArticle)
+  }
 
   return (
     <div>
       <h1 className={styles.caption}>
         Add article
       </h1>
-      <form>
+      <form onSubmit={submitFormArticle}>
         <div className={styles.inputAdd}>
           {articleFormInputs.map((input) =>
             <ArticleFile
@@ -91,15 +97,19 @@ export const AddArticle = () => {
         </div>
         <CreateArticle
           setFormData={setArticle}/>
-        <NoPhotoArticle
+        <PhotoArticle
           onChange={handleImageChange}
+          onDelete={handleDeleteImage}
         />
         <div>
-          {file?.name}
+          <>
+            {article.imgArticle ?
+              file?.name : ''}
+          </>
         </div>
         <button
           className={styles.buttonPublish}
-          onClick={submitFormArticle}>
+          type="submit">
           Publish an article
         </button>
       </form>

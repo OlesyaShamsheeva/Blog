@@ -1,8 +1,7 @@
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes as Switch } from 'react-router-dom';
 import { createContext, useState } from 'react';
-import { MainContainer } from './components/MainContainer/MainConteiner';
 
+import { MainContainer } from './components/MainContainer/MainConteiner';
 import { RegistrationUser } from './pages/RegistrationUser';
 import { AuthorizationUser } from './pages/AuthorizationUser';
 import { AllArticles } from './pages/AllArticles';
@@ -11,6 +10,8 @@ import { ArticleDetails } from './pages/ArticleDetails';
 import { Profile } from './pages/Profile';
 import { AddArticle } from './pages/AddArticle/AddArticle';
 
+import { Routes } from './constants';
+import './App.css';
 
 export const MyContext = createContext()
 
@@ -18,6 +19,16 @@ function App() {
   const [isAuth, setIsAuth] = useState(!!localStorage.getItem('token'))
   const [user, setUser] = useState({})
   const [article, setArticle] = useState([])
+
+  const renderPrivateComponent = (component) => (
+    isAuth ? (
+      <MainContainer>
+        {component}
+      </MainContainer>
+    ) : (
+      <Navigate to={Routes.AUTHORIZATION}/>
+    )
+  )
 
   return (
     <MyContext.Provider value={{
@@ -27,26 +38,20 @@ function App() {
       setUser,
       article,
       setArticle,
-
     }}>
       <div className="App">
-        <Routes>
-          <Route path="/all-articles" element={<MainContainer>
+        <Switch>
+          <Route path={Routes.UNKNOWN} element={<Navigate to={Routes.ALL_ARTICLES}/>}/>
+          <Route path={Routes.REGISTRATION} element={<MainContainer><RegistrationUser/></MainContainer>}/>
+          <Route path={Routes.AUTHORIZATION} element={<MainContainer><AuthorizationUser/></MainContainer>}/>
+          <Route path={Routes.ALL_ARTICLES} element={<MainContainer>
             <AllArticles/>
           </MainContainer>}/>
-          <Route path="/my-articles" element={<MainContainer>
-            <MyArticles/>
-          </MainContainer>}/>
-          <Route path="/add-article" element={<MainContainer>
-            <AddArticle/>
-          </MainContainer>}/>
-          <Route path="/profile" element={<MainContainer>
-            <Profile/>
-          </MainContainer>}/>
-          <Route path="/registration" element={<MainContainer><RegistrationUser/></MainContainer>}/>
-          <Route path="/authorization" element={<MainContainer><AuthorizationUser/></MainContainer>}/>
-          <Route path="/article/:articleId" element={<MainContainer><ArticleDetails/></MainContainer>}/>
-        </Routes>
+          <Route path={Routes.MY_ARTICLES} element={renderPrivateComponent(<MyArticles/>)}/>
+          <Route path={Routes.ADD_ARTICLE} element={renderPrivateComponent(<AddArticle/>)}/>
+          <Route path={Routes.PROFILE} element={renderPrivateComponent(<Profile/>)}/>
+          <Route path={Routes.ARTICLE_DETAIL} element={renderPrivateComponent(<ArticleDetails/>)}/>
+        </Switch>
       </div>
     </MyContext.Provider>
   );

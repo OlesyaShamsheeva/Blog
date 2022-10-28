@@ -1,18 +1,18 @@
 import { useState, useEffect, useContext } from 'react';
 import { usePagination } from '../../hook/usePagination';
+
 import { NotArticles } from '../../components/Article/NoArticle';
-import { Pagination } from '../../components/Pagination';
 import { Article } from '../../components/Article';
 
 import { getAllArticles } from '../../http/articleApi';
 import { MyContext } from '../../App';
 import styles from './AllArticles.module.css';
+import { Pagination } from '../../components/Pagination';
 
-export const AllArticles = ({}) => {
+export const AllArticles = () => {
   const { article, setArticle } = useContext(MyContext)
 
   const [popularArticle, setPopularArticle] = useState(null);
-  const [state, setState] = useState([])
 
   const {
     firstContentIndex,
@@ -45,7 +45,7 @@ export const AllArticles = ({}) => {
       const filtered = article.filter(
         (article) => article._id !== popularArticle._id
       );
-      setState(filtered)
+      setArticle(filtered)
     }
   }, [article, popularArticle]);
 
@@ -54,34 +54,21 @@ export const AllArticles = ({}) => {
       {popularArticle?.viewCounter >= 0 && (
         <Article isBigImg article={popularArticle}/>
       )}
-      {state.length > 0 ? (
+      {article.length > 0 ? (
         <h3 className={styles.title}> Popular Articles</h3>
       ) : (
         ''
       )}
       <div>
-        {state.length > 0 ? (
-          state.slice(firstContentIndex, lastContentIndex).map((article) => (
+        {article.length > 0 ? (
+          article.slice(firstContentIndex, lastContentIndex).map((article) => (
             <Article key={article._id} article={article}/>
           ))
         ) : (
           <NotArticles/>
         )}
       </div>
-      <div className={styles.pagBtn}>
-         <span>
-           {state?.length > 0 && <button className={styles.pag} onClick={prevPage}>
-             Prev
-           </button>}
-         </span>
-        <span>
-          {state?.length > 0 &&
-            <button className={styles.pag} onClick={nextPage}>
-              Next
-            </button>
-          }
-        </span>
-      </div>
+      {article.length > 0 ? <Pagination next={nextPage} prev={prevPage} />:""}
     </div>
   );
 };

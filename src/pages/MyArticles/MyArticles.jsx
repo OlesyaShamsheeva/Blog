@@ -5,14 +5,16 @@ import { Article } from '../../components/Article/';
 import { NotArticles } from '../../components/Article/NoArticle';
 import { PhotoUser } from '../../components/PhotoUser';
 
-import { MyContext } from '../../App';
 import jwt_decode from 'jwt-decode';
+
+import { MyContext } from '../../App';
 import { myProfile } from '../../http/userApi';
 import { myArticleId } from '../../http/articleApi';
 import styles from './MyArticles.module.css'
+import { Pagination } from '../../components/Pagination';
 
 
-export const MyArticles = ({ bigAvatar = false }) => {
+export const MyArticles = ( { bigAvatar = false } ) => {
   const { article, setArticle } = useContext(MyContext)
   const { user, setUser } = useContext(MyContext)
 
@@ -40,8 +42,8 @@ export const MyArticles = ({ bigAvatar = false }) => {
             photo={user.avatar}
             bigAvatar={bigAvatar} isBigAvatar/>
           <div className={styles.name}>
-            {user.firstName}
-            {user.lastName}
+         <span>{user.firstName}</span>
+         <span className={styles.lastName}>{user.lastName}</span>
           </div>
           <div className={styles.text}>
             Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed
@@ -53,17 +55,7 @@ export const MyArticles = ({ bigAvatar = false }) => {
             <Article isVertical isBigImg key={article._id} article={article}/>
           ))) : <NotArticles/>}
           <div className={styles.pagBtn}>
-         <span>
-           {article?.length > 0 && <button className={styles.pag} onClick={prevPage}>
-             Prev
-           </button>
-           }
-         </span>
-            <span>
-              {article?.length > 0 && <button className={styles.pag} onClick={nextPage}>
-                Next
-              </button>
-              }</span>
+            {article.length > 0 ? <Pagination next={nextPage} prev={prevPage} />:""}
           </div>
         </div>
       </div>

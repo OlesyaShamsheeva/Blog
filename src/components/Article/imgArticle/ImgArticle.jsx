@@ -1,9 +1,9 @@
 import styles from './ImgArticle.module.css'
-
-export const ImgArticle = ({ url, isBigImg }) => {
+import img from "../../../../src/assets/imgs/img.png"
+export const ImgArticle = ( {  photo,isBigImg } ) => {
   return (
     <div>
-      <img src={url} className={isBigImg ? styles.bigImg : styles.smallImg} alt="Article"/>
+      <img src={photo||img} className={isBigImg ? styles.bigImg : styles.smallImg} alt="Article"/>
     </div>
   )
 }

@@ -1,15 +1,19 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { TextField } from '../../components/TextField';
-import { authorization, myProfile } from '../../http/userApi';
-import { MyContext } from '../../App';
-import styles from './AuthorizationUser.module.css'
 
+import { authorization } from '../../http/userApi';
+import { Routes } from '../../constants'
+import { MyContext } from '../../App';
+
+import styles from './AuthorizationUser.module.css'
 
 export const AuthorizationUser = () => {
   const navigate = useNavigate()
+
   const { setIsAuth, setUser } = useContext(MyContext)
+
   const [errorAut, setErrorAut] = useState(false)
   const [stateAut, setStateAut] = useState({
     emailAddress: '',
@@ -37,7 +41,7 @@ export const AuthorizationUser = () => {
     await authorization(stateAut.emailAddress, stateAut.password).then((res) => {
         setIsAuth(true)
         setUser(res)
-        navigate('/all-articles')
+        navigate(Routes.ALL_ARTICLES)
       }
     ).catch(() => {
       setErrorAut(true)
@@ -46,7 +50,9 @@ export const AuthorizationUser = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.h1}>Log in to your account</h1>
+      <h1 className={styles.h1}>
+        Log in to your account
+      </h1>
       {passwordFormInput.map((input) => (
         <TextField
           key={input.name}
@@ -64,7 +70,7 @@ export const AuthorizationUser = () => {
       </button>
       <span className={styles.link}>
                 Don’t have a Times account?
-                <NavLink to="/registration" className={styles.active}>Create one</NavLink>
+                <NavLink to={Routes.REGISTRATION} className={styles.active}>Create one</NavLink>
             </span>
     </div>
   )

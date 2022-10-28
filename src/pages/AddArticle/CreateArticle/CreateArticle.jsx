@@ -7,7 +7,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 import styles from "./CreateArticle.module.css"
 
-export const CreateArticle = ({ setFormData }) => {
+export const CreateArticle = ( { setFormData } ) => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
   const onEditorStateChange = (e) => setEditorState(e)
@@ -22,12 +22,12 @@ export const CreateArticle = ({ setFormData }) => {
 
       <div className={styles.editorAdd}>
         <Editor
-            editorStyle={{ height: "400px" }}
-            wrapperClassName="wrapper-class"
-            editorClassName="editor-class"
-            toolbarClassName="toolbar-class"
-            editorState={editorState}
-            onEditorStateChange={onEditorStateChange}
+            editorStyle= {{ height: "400px" }}
+            wrapperClassName= "wrapper-class"
+            editorClassName= "editor-class"
+            toolbarClassName= "toolbar-class"
+            editorState= { editorState }
+            onEditorStateChange= {onEditorStateChange}
         />
       </div>)
 }

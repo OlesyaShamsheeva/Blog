@@ -1,8 +1,8 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import styles from './Menu.module.css'
 
-export const Menu = ({ logOut, isHeader }) => {
+export const Menu = ( { logOut, isHeader } ) => {
   const links = [
     {
       id: 1,

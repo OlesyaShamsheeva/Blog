@@ -1,16 +1,21 @@
 import { NavLink, useNavigate } from 'react-router-dom';
-import * as Yup from 'yup';
 import { useState } from 'react';
 import { useFormik } from 'formik';
 
+import * as Yup from 'yup';
+
 import { TextField } from '../../components/TextField';
 
+import { Routes } from '../../constants'
+import { Validation } from '../../constants'
 import { registration } from '../../http/userApi';
-import styles from './RefistrationUser.module.css'
+import styles from './RegistrationUser.module.css'
 
 export const RegistrationUser = () => {
   const [error, setError] = useState(false);
+
   const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -20,36 +25,28 @@ export const RegistrationUser = () => {
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
-        .min(2, 'Must be at least 3 characters')
-        .max(15, 'Must be 15 characters of less')
-        .required('Required!'),
+        .min(3, Validation.MIN_LENGTH_3)
+        .max(15, Validation.MAX_LENGTH_15)
+        .required(Validation.REQUIRED),
       lastName: Yup.string()
-        .min(2, 'Must be at least 3 characters')
-        .max(20, 'Must be 20 characters of less')
-        .required('Required!'),
+        .min(3, Validation.MIN_LENGTH_3)
+        .max(15, Validation.MAX_LENGTH_15)
+        .required(Validation.REQUIRED),
       emailAddress: Yup.string()
-        .email('Invalid email address')
-        .required('Required!'),
+        .email(Validation.INVALID_EMAIL)
+        .required(Validation.REQUIRED),
       password: Yup.string()
-        .required('No password provided.')
-        .min(8, 'Password is too short - should be 8 chars minimum.')
-        .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+        .required(Validation.REQUIRED)
+        .min(8, Validation.PASSWORD_MIN_LENGTH_8)
+        .matches(/[a-zA-Z]/, Validation.PASSWORD_LETTERS),
     }),
-    onSubmit: async (values) => {
-      await registration(
-        formik.values.firstName,
-        formik.values.lastName,
-        formik.values.emailAddress,
-        formik.values.password,
-      ).then(
-        setError(false),
-        navigate('/authorization')
-      ).catch(
-        setError(true)
-      )
+    onSubmit: (values) => {
+      registration(values).then(() => {
+          setError(false)
+          navigate(Routes.AUTHORIZATION)
+      }).catch(() => setError(true))
     },
   });
-
 
   const registerFormInputs = [
     {
@@ -77,6 +74,7 @@ export const RegistrationUser = () => {
       value: formik.values.password,
     },
   ];
+
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.h1}>Create your free account</h1>
@@ -91,20 +89,21 @@ export const RegistrationUser = () => {
             />
             {formik.touched[input.name] && formik.errors[input.name] ? (
               <div className={styles.errorvalid}>
-                {' '}
                 {formik.errors[input.name]}
               </div>
             ) : null}
           </div>
         ))}
-        {error && <div className={styles.error}>email already in use</div>}
+        {error && <div className={styles.error}>
+          email already in use
+        </div>}
         <button className={styles.button} type="submit">
           Create Account
         </button>
       </form>
       <span className={styles.link}>
         Do you have an account?
-        <NavLink to="/authorization" className={styles.active}>
+        <NavLink to={Routes.AUTHORIZATION} className={styles.active}>
          Login Account
         </NavLink>
       </span>

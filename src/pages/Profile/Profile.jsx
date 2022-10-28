@@ -14,10 +14,7 @@ import { updateProfile } from '../../http/userApi';
 import styles from './Profile.module.css'
 
 export const Profile = ({ inputRegistr = false }) => {
-
-
   const { user, setUser } = useContext(MyContext)
-
 
   const inputProfile = [
     {
@@ -73,6 +70,7 @@ export const Profile = ({ inputRegistr = false }) => {
       _id: user._id
     })
   }
+
   const handleDeleteImage = () => {
     setUser((prevState) => ({ ...prevState, avatar: '' }))
     deletePhoto(user.avatar)

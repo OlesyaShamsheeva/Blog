@@ -7,6 +7,7 @@
     background: white;
     color: #242424;
 }
+
 .SignIn{
     width: 113px;
     height: 47px;
@@ -16,24 +17,40 @@
     background: black;
     color:white;
 }
+
 .button{
     display: flex; justify-content: space-around;
   gap: 24px;
-
 }
+
 .button_white{
   background-color: white;
   color: black;
   margin-top: 0px;
 }
+
 .button_black{
   background-color: #242424;
   color: white;
   margin-top: 0px;
 }
+
 .button_black_footer{
   background-color: #242424;
   color: white;
   border-color: white;
   margin-top: 0px;
+}
+
+@media (max-width: 1200px){
+  .LogIn{
+    width: 90px;
+  }
+  .SignIn{
+    width: 90px;
+  }
+  .button{
+    display: flex; justify-content: space-around;
+    gap: 12px;
+  }
 }

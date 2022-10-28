@@ -3,13 +3,15 @@ import { usePagination } from '../../hook/usePagination';
 
 import { NotArticles } from '../../components/Article/NoArticle';
 import { Article } from '../../components/Article';
+import { Pagination } from '../../components/Pagination';
 
 import { getAllArticles } from '../../http/articleApi';
 import { MyContext } from '../../App';
 import styles from './AllArticles.module.css';
-import { Pagination } from '../../components/Pagination';
+
 
 export const AllArticles = () => {
+
   const { article, setArticle } = useContext(MyContext)
 
   const [popularArticle, setPopularArticle] = useState(null);
@@ -24,20 +26,14 @@ export const AllArticles = () => {
     count: article.length,
   });
 
-  const handleGetArticles = async () => {
-    const { data } = await getAllArticles();
-    setArticle(data);
-    if (data) {
-      setPopularArticle(
-        data.reduce(
-          (result, article) =>
-            result.viewCounter > article.viewCounter ? result : article,
-          { viewCounter: -1, }));
-    }
-  };
-
   useEffect(() => {
-    handleGetArticles();
+    const handleGetArticles = async () => {
+      const { data } = await getAllArticles();
+      const newData = [...data];
+      newData.sort((a, b) => b.viewCounter - a.viewCounter);
+      setPopularArticle(newData[0]);
+    }
+ handleGetArticles()
   }, []);
 
   useEffect(() => {
@@ -47,7 +43,7 @@ export const AllArticles = () => {
       );
       setArticle(filtered)
     }
-  }, [article, popularArticle]);
+  }, [popularArticle]);
 
   return (
     <div>

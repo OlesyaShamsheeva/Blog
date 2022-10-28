@@ -26,8 +26,11 @@ export const Article = ({ article, isBigImg = false, isVertical = false, isBigAv
         <div className={styles.text}
              dangerouslySetInnerHTML={{ __html: article.description }}/>
         <div className={styles.inform}>
-          <PhotoUser photo={article.userAvatar}
-                     isBigAvatar={isBigAvatar}/>
+          <div className={styles.img}>
+            <PhotoUser photo={article.userAvatar}
+                       isBigAvatar={isBigAvatar}/>
+          </div>
+
           <span className={styles.name}>
               {article.firstName}
             <span> {article.lastName}</span>

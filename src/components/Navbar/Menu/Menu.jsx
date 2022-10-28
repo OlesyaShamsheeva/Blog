@@ -1,8 +1,11 @@
 import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
 
 import styles from './Menu.module.css'
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 
-export const Menu = ( { logOut, isHeader } ) => {
+export const Menu = ({ logOut, isHeader }) => {
+  const [nav, setNav] = useState(false);
   const links = [
     {
       id: 1,
@@ -27,8 +30,9 @@ export const Menu = ( { logOut, isHeader } ) => {
   ]
 
   return (
-    <div className={styles.wrapper}>
-      <nav>
+    <div >
+      <div >
+        <nav className={nav ? [styles.menu, styles.active].join(' ') : [styles.menu]}>
         {links.map((link) => (
           <NavLink
             key={link.id}
@@ -45,6 +49,10 @@ export const Menu = ( { logOut, isHeader } ) => {
       >
         Logout
       </button>
+    </div>
+      <div onClick={() => setNav(!nav)} className={styles.mobile_btn}>
+        {nav ? <AiOutlineClose size={25}/> : <AiOutlineMenu size={25}/>}
+      </div>
     </div>
   )
 }

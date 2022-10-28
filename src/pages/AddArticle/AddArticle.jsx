@@ -11,7 +11,7 @@ import { MyContext } from '../../App';
 import { Routes } from '../../constants'
 import styles from './AddArticle.module.css'
 
-export const AddArticle = () => {
+export const AddArticle = ({inputRegistr = false} ) => {
   const navigate = useNavigate()
 
   const { user } = useContext(MyContext)
@@ -81,7 +81,7 @@ export const AddArticle = () => {
   }
 
   return (
-    <div>
+    <div className={styles.wrap}>
       <h1 className={styles.caption}>
         Add article
       </h1>
@@ -92,11 +92,15 @@ export const AddArticle = () => {
               key={input.id}
               name={input.name}
               input={input}
+              inputRegistr={false}
               onChange={handleGetEnter}/>
           )}
         </div>
-        <CreateArticle
-          setFormData={setArticle}/>
+        <div className={styles.textadd}>
+          <CreateArticle
+            setFormData={setArticle}/>
+        </div>
+
         <PhotoArticle
           onChange={handleImageChange}
           onDelete={handleDeleteImage}

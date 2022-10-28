@@ -45,7 +45,10 @@ export const ArticleDetails = ({ isBigAvatar = false }) => {
         <h4 className={styles.caption}>
           {article.title}
         </h4>
-        <ImgArticle photo={article.imgArticle} isBigImg/>
+        <div className={styles.img}>
+          <ImgArticle photo={article.imgArticle} isBigImg/>
+        </div>
+
         <div className={styles.textContent}
              dangerouslySetInnerHTML={{ __html: article.description }}>
         </div>
@@ -65,11 +68,13 @@ export const ArticleDetails = ({ isBigAvatar = false }) => {
               {article.viewCounter}
                     </span>
             <span>
-             <button className={styles.buttonTag}>
+           </span>
+            <button className={styles.buttonTag}>
             {article.category}
           </button>
-           </span>
           </div>
+         <div>
+         </div>
         </div>
       </div>
     </div>

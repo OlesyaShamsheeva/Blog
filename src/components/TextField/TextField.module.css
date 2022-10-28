@@ -27,3 +27,25 @@
   border: 1px solid #8C8C8C;
   margin-bottom: 32px;
 }
+
+@media (max-width: 1024px){
+  .inputChange {
+    width: 250px;
+  }
+
+}
+
+@media (max-width: 850px){
+  .inputChange {
+    width: 300px;
+  }
+}
+
+
+
+
+@media (max-width: 650px){
+  .inputChange {
+    width: 420px;
+  }
+}

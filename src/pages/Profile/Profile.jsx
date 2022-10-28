@@ -82,7 +82,7 @@ export const Profile = ({ inputRegistr = false }) => {
   }, [])
 
   return (
-    <div>
+    <div className={styles.wrap}>
       <h3 className={styles.caption}>Profile</h3>
       <div className={styles.block}>
         <PhotoUser isBigAvatar photo={user.avatar}>
@@ -108,7 +108,9 @@ export const Profile = ({ inputRegistr = false }) => {
                 setUser({ ...user, description: e.target.value })
               }}/>
           </div>
-          <button type="submit">Save Changes</button>
+          <div className={styles.submit}>
+            <button type="submit" className={styles.btn}>Save Changes</button>
+          </div>
         </form>
       </div>
     </div>

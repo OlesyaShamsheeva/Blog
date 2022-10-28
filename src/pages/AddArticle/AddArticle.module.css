@@ -10,12 +10,18 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  width: 100%;
+  width: 90%;
 }
 .inputArt{
-  width: 100%;
+  width: 90%;
   height: 48px;
   text-indent: 16px;
+}
+.textadd{
+  width: 90%;
+}
+.wrap{
+  padding-left: 20px;
 }
 .buttonPublish{
   display: flex;
@@ -31,3 +37,8 @@
   border: none;
   text-align: center}
 
+@media (max-width: 850px){
+  .caption{
+    font-size: 32px;
+  }
+}

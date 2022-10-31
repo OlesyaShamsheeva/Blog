@@ -2,19 +2,18 @@ import { useContext, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { TextField } from '../../components/TextField';
-
 import { authorization } from '../../http/userApi';
+
 import { Routes } from '../../constants'
 import { MyContext } from '../../App';
-
 import styles from './AuthorizationUser.module.css'
 
 export const AuthorizationUser = () => {
   const navigate = useNavigate()
-
   const { setIsAuth, setUser } = useContext(MyContext)
 
   const [errorAut, setErrorAut] = useState(false)
+  const [errorText, setErrorText] = useState('')
   const [stateAut, setStateAut] = useState({
     emailAddress: '',
     password: '',
@@ -43,8 +42,9 @@ export const AuthorizationUser = () => {
         setUser(res)
         navigate(Routes.ALL_ARTICLES)
       }
-    ).catch(() => {
+    ).catch((error) => {
       setErrorAut(true)
+      setErrorText(error.response.data.message)
     })
   }
 
@@ -60,7 +60,7 @@ export const AuthorizationUser = () => {
           onChange={handleChangeAut} inputRegistr/>
       ))}
       {errorAut && <div className={styles.error}>
-        User is not found
+        {errorText}
       </div>}
       <button
         className={styles.button}

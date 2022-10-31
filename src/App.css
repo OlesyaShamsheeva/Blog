@@ -6,11 +6,18 @@
 a {
   cursor: pointer;
 }
-
+a:active{
+  border-bottom: 1px solid;
+}
+a:focus{
+  border-bottom: 1px solid;
+}
 button {
   cursor: pointer;
 }
-
+h4{
+  cursor: pointer;
+}
 .container {
   max-width: 1100px;
   margin: 0 auto;

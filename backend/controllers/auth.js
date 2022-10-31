@@ -22,13 +22,13 @@ module.exports.authorization = async function (req, res) {
     } else {
       // Пароли не совпали
       res.status(401).json({
-        message: 'Пароли не совпадают. Попробуйте снова.'
+        message: 'Invalid password'
       })
     }
   } else {
     // Пользователя нет, ошибка
     res.status(404).json({
-      message: 'Пользователь с таким email не найден.'
+      message: 'Email already in use'
     })
   }
 }

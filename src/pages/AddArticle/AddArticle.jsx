@@ -6,16 +6,15 @@ import { ArticleFile } from './ArticleFile';
 import { PhotoArticle } from '../../components/PhotoArticle';
 
 import { addArticle, deletePhotoArticle } from '../../http/articleApi';
-
 import { MyContext } from '../../App';
 import { Routes } from '../../constants'
 import styles from './AddArticle.module.css'
 
-export const AddArticle = () => {
+export const AddArticle = ({inputRegistr = false} ) => {
   const navigate = useNavigate()
 
-  const { user } = useContext(MyContext)
-  const { article, setArticle } = useContext(MyContext)
+  const { article, setArticle, user } = useContext(MyContext)
+
   const [file, setFile] = useState(null)
 
   const articleFormInputs = [
@@ -74,6 +73,7 @@ export const AddArticle = () => {
   }
 
   const handleGetEnter = (e) => setArticle((prevState) => ( { ...prevState, [e.target.name]: e.target.value } ))
+
   const handleDeleteImage = (e) => {
     e.preventDefault()
     setArticle((prevState) => ({ ...prevState, imgArticle: '' }))
@@ -81,7 +81,7 @@ export const AddArticle = () => {
   }
 
   return (
-    <div>
+    <div className={styles.wrap}>
       <h1 className={styles.caption}>
         Add article
       </h1>
@@ -92,11 +92,14 @@ export const AddArticle = () => {
               key={input.id}
               name={input.name}
               input={input}
+              inputRegistr={false}
               onChange={handleGetEnter}/>
           )}
         </div>
-        <CreateArticle
-          setFormData={setArticle}/>
+        <div className={styles.textadd}>
+          <CreateArticle
+            setFormData={setArticle}/>
+        </div>
         <PhotoArticle
           onChange={handleImageChange}
           onDelete={handleDeleteImage}

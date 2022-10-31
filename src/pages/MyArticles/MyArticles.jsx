@@ -46,8 +46,7 @@ export const MyArticles = ( { bigAvatar = false } ) => {
          <span className={styles.lastName}>{user.lastName}</span>
           </div>
           <div className={styles.text}>
-            Pellentesque odio nisi, euismod in, pharetra a, ultricies in, diam. Sed
-            arcu.
+            {user.description}
           </div>
         </div>
         <div>

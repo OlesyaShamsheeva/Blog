@@ -6,3 +6,4 @@ export const MY_ARTICLES = '/my-articles'
 export const ADD_ARTICLE = '/add-article'
 export const PROFILE = '/profile'
 export const ARTICLE_DETAIL = '/article/:articleId'
+

@@ -1,5 +1,6 @@
 import styles from './ImgArticle.module.css'
 import img from "../../../../src/assets/imgs/img.png"
+
 export const ImgArticle = ( {  photo,isBigImg } ) => {
   return (
     <div>

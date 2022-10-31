@@ -2,18 +2,15 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useFormik } from 'formik';
 
-import * as Yup from 'yup';
-
 import { TextField } from '../../components/TextField';
 
 import { Routes } from '../../constants'
-import { Validation } from '../../constants'
+import { ValidationSchema } from './ValidationSchema';
 import { registration } from '../../http/userApi';
 import styles from './RegistrationUser.module.css'
 
 export const RegistrationUser = () => {
   const [error, setError] = useState(false);
-
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -23,25 +20,7 @@ export const RegistrationUser = () => {
       emailAddress: '',
       password: '',
     },
-    validationSchema: Yup.object({
-      firstName: Yup.string().trim()
-        .min(3, Validation.MIN_LENGTH_3)
-        .max(15, Validation.MAX_LENGTH_15)
-        .matches(/^[A-Za-z-ЁёА-я\s`-]+$/, 'Only letters allowed')
-        .required(Validation.REQUIRED),
-      lastName: Yup.string().trim()
-        .min(3, Validation.MIN_LENGTH_3)
-        .max(15, Validation.MAX_LENGTH_15)
-        .matches(/^[A-Za-z-ЁёА-я\s`-]+$/, 'Only letters allowed')
-        .required(Validation.REQUIRED),
-      emailAddress: Yup.string()
-        .email(Validation.INVALID_EMAIL)
-        .required(Validation.REQUIRED),
-      password: Yup.string()
-        .required(Validation.REQUIRED)
-        .min(8, Validation.PASSWORD_MIN_LENGTH_8)
-        .matches(/[a-zA-Z]/, Validation.PASSWORD_LETTERS),
-    }),
+    validationSchema: ValidationSchema,
     onSubmit: (values) => {
       registration(values).then(() => {
         setError(false)

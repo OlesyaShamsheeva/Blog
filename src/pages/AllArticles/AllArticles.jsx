@@ -1,14 +1,13 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from 'react';
+import { usePagination } from '../../hook/usePagination';
 
-import { usePagination } from "../../hook/usePagination";
+import { NotArticles } from '../../components/Article/NoArticle';
+import { Article } from '../../components/Article';
+import { Pagination } from '../../components/Pagination';
+import { getAllArticles } from '../../http/articleApi';
 
-import { NotArticles } from "../../components/Article/NoArticle";
-import { Article } from "../../components/Article";
-import { Pagination } from "../../components/Pagination";
-import { getAllArticles } from "../../http/articleApi";
-
-import { MyContext } from "../../App";
-import styles from "./AllArticles.module.css";
+import { MyContext } from '../../App';
+import styles from './AllArticles.module.css';
 
 export const AllArticles = () => {
   const { article, setArticle } = useContext(MyContext);
@@ -37,23 +36,23 @@ export const AllArticles = () => {
   return (
     <div>
       {popularArticle?.viewCounter >= 0 && (
-        <Article isBigImg article={popularArticle} />
+        <Article isBigImg article={popularArticle}/>
       )}
       {article.length > 0 ? (
         <h3 className={styles.title}> Popular Articles</h3>
       ) : (
-        ""
+        ''
       )}
       <div>
         {article.length > 0 ? (
           article
             .slice(firstContentIndex, lastContentIndex)
-            .map((article) => <Article key={article._id} article={article} />)
+            .map((article) => <Article key={article._id} article={article}/>)
         ) : (
-          <NotArticles />
+          <NotArticles/>
         )}
       </div>
-      {article.length > 0 ? <Pagination next={nextPage} prev={prevPage} /> : ""}
+      {article.length > 0 ? <Pagination next={nextPage} prev={prevPage}/> : ''}
     </div>
   );
 };

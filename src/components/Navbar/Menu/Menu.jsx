@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
+import { Routes } from '../../../constants';
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import styles from "./Menu.module.css";
 
@@ -11,22 +12,22 @@ export const Menu = ({ logOut, isHeader }) => {
     {
       id: 1,
       value: "All articles",
-      path: "/all-articles",
+      path: Routes.ALL_ARTICLES,
     },
     {
       id: 2,
       value: "My articles",
-      path: "/my-articles/",
+      path: Routes.MY_ARTICLES,
     },
     {
       id: 3,
       value: "Add article",
-      path: "/add-article",
+      path: Routes.ADD_ARTICLE,
     },
     {
       id: 4,
       value: "Profile",
-      path: "/profile",
+      path: Routes.PROFILE,
     },
   ];
   return (

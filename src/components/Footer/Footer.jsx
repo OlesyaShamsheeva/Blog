@@ -10,9 +10,7 @@ export const Footer = () => {
       <div className={styles.nav}>
         <Navbar logo={logo} isHeader={false}/>
       </div>
-      <div>
-        <Reference/>
-      </div>
+      <Reference/>
     </div>
   </footer>
 }

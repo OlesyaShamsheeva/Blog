@@ -22,7 +22,7 @@
 }
 .inputChange {
   box-sizing: border-box;
-  width: 316px;
+  width: 500px;
   height: 47px;
   border: 1px solid #8C8C8C;
   margin-bottom: 32px;
@@ -40,9 +40,6 @@
     width: 300px;
   }
 }
-
-
-
 
 @media (max-width: 650px){
   .inputChange {

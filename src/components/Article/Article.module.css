@@ -19,9 +19,8 @@
 .informBlock {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: space-around;
   border-bottom: 1px solid #EBEBEB;
-  width: 680px;
 }
 
 .tag {
@@ -73,8 +72,6 @@
 }
 
 .name {
-  padding-top: 13px;
-  padding-bottom: 13px;
   font-family: 'IBM Plex Sans Medium', sans-serif;
   font-weight: 500;
   font-size: 14px;
@@ -83,8 +80,6 @@
 }
 
 .data {
-  padding-top: 13px;
-  padding-bottom: 13px;
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 400;
   font-size: 12px;
@@ -93,8 +88,6 @@
 }
 
 .view {
-  padding-top: 13px;
-  padding-bottom: 13px;
   gap: 10px;
   width: 29px;
   height: 12px;

@@ -7,7 +7,9 @@
   text-align: start;
   color: #242424;
 }
-
+.errorvalid{
+  color:red
+}
 .block {
   display: flex;
   flex-direction: row;
@@ -83,7 +85,9 @@ textarea {
   flex-direction: row;
   gap: 48px;
 }
-
+.foto{
+  padding-left: 1px;
+}
 
 @media (max-width: 1300px){
   input {
@@ -112,6 +116,10 @@ textarea {
 .block{
   flex-direction: column;
 }
+  .foto{
+    display: flex;
+    padding-bottom: 40px;
+  }
   .caption {
     font-size: 32px;
     padding-left: 40px;

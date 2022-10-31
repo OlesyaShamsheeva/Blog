@@ -1,3 +1,7 @@
+
+.wrap {
+  display: flex;
+}
 .wrapper{
   display: flex;
   justify-content: space-between;
@@ -5,25 +9,22 @@
 }
 
 a{
-    padding: 16px;
-    font-size: 15px;
-    line-height: 15px;
-    color: #8C8C8C;
-    text-decoration: none;
+  padding: 16px;
+  font-size: 15px;
+  line-height: 15px;
+  color: #8C8C8C;
+  text-decoration: none;
 }
-
-.active{
-    border-bottom: 1px solid black;
+.aut{
+  padding-left: 10px;
 }
-
 button{margin-top: 0px;
-    width: 113px;
-    height: 47px;
-    font-family: 'IBM Plex Sans',sans-serif;
-    font-size: 16px;
-    border: 1px solid #242424;
+  width: 113px;
+  height: 47px;
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 16px;
+  border: 1px solid #242424;
 }
-
 .header_button{
   margin-left: 64px;
   margin-top: 0px;
@@ -31,9 +32,8 @@ button{margin-top: 0px;
   color: white;
   border-color: black;
 }
-
 .footer_button{
- margin-left: 64px;
+  margin-left: 64px;
   margin-top: 0px;
   background-color: #242424;
   color: white;
@@ -46,12 +46,10 @@ button{margin-top: 0px;
   line-height: 28px;
   gap: 30px;
 }
-
 .mobile_btn {
   display: none;
 }
-
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .mobile_btn {
     display: block;
     position: absolute;
@@ -60,14 +58,13 @@ button{margin-top: 0px;
     cursor: pointer;
     z-index: 10;
   }
-
   .menu {
     display: flex;
     flex-direction: column;
     justify-content: center;
     position: fixed;
-    left: -100%;
-    right: 0;
+    right: 100%;
+    left: 100%;
     top: 0;
     bottom: 0;
     width: 100%;
@@ -76,12 +73,34 @@ button{margin-top: 0px;
     z-index: 10;
     transition: left 1s;
   }
-
+  .wrap{
+    padding: 0 50px;
+  }
   .active {
     left: 0;
   }
-
   .menu a {
     font-size: 28px;
+  }
+  button{
+    width: 150px;
+    margin-left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .header_button{
+    margin-left: 0px;
+    margin-top: 0px;
+    background-color: #242424;
+    color: white;
+    border-color: black;
+  }
+  .footer_button{
+    margin-left: 0px;
+    margin-top: 0px;
+    background-color: #242424;
+    color: white;
+    border-color: white;
   }
 }

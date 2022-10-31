@@ -24,13 +24,15 @@ export const RegistrationUser = () => {
       password: '',
     },
     validationSchema: Yup.object({
-      firstName: Yup.string()
+      firstName: Yup.string().trim()
         .min(3, Validation.MIN_LENGTH_3)
         .max(15, Validation.MAX_LENGTH_15)
+        .matches(/^[A-Za-z-ЁёА-я\s`-]+$/, 'Only letters allowed')
         .required(Validation.REQUIRED),
-      lastName: Yup.string()
+      lastName: Yup.string().trim()
         .min(3, Validation.MIN_LENGTH_3)
         .max(15, Validation.MAX_LENGTH_15)
+        .matches(/^[A-Za-z-ЁёА-я\s`-]+$/, 'Only letters allowed')
         .required(Validation.REQUIRED),
       emailAddress: Yup.string()
         .email(Validation.INVALID_EMAIL)
@@ -42,8 +44,8 @@ export const RegistrationUser = () => {
     }),
     onSubmit: (values) => {
       registration(values).then(() => {
-          setError(false)
-          navigate(Routes.AUTHORIZATION)
+        setError(false)
+        navigate(Routes.AUTHORIZATION)
       }).catch(() => setError(true))
     },
   });
@@ -110,4 +112,14 @@ export const RegistrationUser = () => {
     </div>
   );
 };
+
+
+
+
+
+
+
+
+
+
 

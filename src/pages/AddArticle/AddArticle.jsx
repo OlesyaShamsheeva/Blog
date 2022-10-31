@@ -6,7 +6,6 @@ import { ArticleFile } from './ArticleFile';
 import { PhotoArticle } from '../../components/PhotoArticle';
 
 import { addArticle, deletePhotoArticle } from '../../http/articleApi';
-
 import { MyContext } from '../../App';
 import { Routes } from '../../constants'
 import styles from './AddArticle.module.css'
@@ -14,8 +13,8 @@ import styles from './AddArticle.module.css'
 export const AddArticle = ({inputRegistr = false} ) => {
   const navigate = useNavigate()
 
-  const { user } = useContext(MyContext)
-  const { article, setArticle } = useContext(MyContext)
+  const { article, setArticle, user } = useContext(MyContext)
+
   const [file, setFile] = useState(null)
 
   const articleFormInputs = [
@@ -74,6 +73,7 @@ export const AddArticle = ({inputRegistr = false} ) => {
   }
 
   const handleGetEnter = (e) => setArticle((prevState) => ( { ...prevState, [e.target.name]: e.target.value } ))
+
   const handleDeleteImage = (e) => {
     e.preventDefault()
     setArticle((prevState) => ({ ...prevState, imgArticle: '' }))
@@ -100,7 +100,6 @@ export const AddArticle = ({inputRegistr = false} ) => {
           <CreateArticle
             setFormData={setArticle}/>
         </div>
-
         <PhotoArticle
           onChange={handleImageChange}
           onDelete={handleDeleteImage}

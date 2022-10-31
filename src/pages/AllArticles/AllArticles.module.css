@@ -21,3 +21,19 @@
   display: flex;
   justify-content: space-between;
 }
+
+@media (max-width: 1200px){
+
+  .title {
+   padding-left: 50px;
+  }
+}
+
+
+@media (max-width: 800px){
+
+  .title {
+     font-size: 42px;
+     text-align: center;
+   }
+}

@@ -1,19 +1,20 @@
-.bigImg{
+.bigImg {
   width: 582px;
   height: 397px;
-justify-content: start;
+  justify-content: start;
 }
-.smallImg{
+
+.smallImg {
   width: 367px;
   height: 260px;
 }
 
-@media (max-width: 1200px){
-  .bigImg{
+@media (max-width: 1200px) {
+  .bigImg {
     width: 300px;
     height: 300px;
   }
-  .smallImg{
-    width:280px;
+  .smallImg {
+    width: 280px;
   }
 }

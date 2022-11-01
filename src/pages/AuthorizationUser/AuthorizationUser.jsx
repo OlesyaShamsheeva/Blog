@@ -1,52 +1,19 @@
-import { useContext, useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 
 import { TextField } from '../../components/TextField';
-import { authorization } from '../../http/userApi';
-
+import { useAuthorization } from './Authorizatuon.utils';
 import { Routes } from '../../constants'
-import { MyContext } from '../../App';
 import styles from './AuthorizationUser.module.css'
 
 export const AuthorizationUser = () => {
-  const navigate = useNavigate()
-  const { setIsAuth, setUser } = useContext(MyContext)
 
-  const [errorAut, setErrorAut] = useState(false)
-  const [errorText, setErrorText] = useState('')
-  const [stateAut, setStateAut] = useState({
-    emailAddress: '',
-    password: '',
-  })
-
-  const passwordFormInput = [
-    {
-      label: 'Email Address',
-      name: 'emailAddress',
-      type: 'text',
-      value: stateAut.emailAddress
-    },
-    {
-      label: 'Password',
-      name: 'password',
-      type: 'password',
-      value: stateAut.password
-    },
-  ]
-
-  const handleChangeAut = (e) => setStateAut((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
-
-  const submitFormAut = async () => {
-    await authorization(stateAut.emailAddress, stateAut.password).then((res) => {
-        setIsAuth(true)
-        setUser(res)
-        navigate(Routes.ALL_ARTICLES)
-      }
-    ).catch((error) => {
-      setErrorAut(true)
-      setErrorText(error.response.data.message)
-    })
-  }
+  const {
+    passwordFormInput,
+    handleChangeAut,
+    errorAut,
+    errorText,
+    submitFormAut
+  } = useAuthorization()
 
   return (
     <div className={styles.wrapper}>
@@ -57,7 +24,8 @@ export const AuthorizationUser = () => {
         <TextField
           key={input.name}
           input={input}
-          onChange={handleChangeAut} inputRegistr/>
+          onChange={handleChangeAut}
+          inputRegistr/>
       ))}
       {errorAut && <div className={styles.error}>
         {errorText}

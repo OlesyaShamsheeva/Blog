@@ -13,7 +13,6 @@ export const ProfileFormValidation = Yup.object({
     .max(15, Validation.MAX_LENGTH_15)
     .matches((RegExp.REQ_VALID), Validation.ONLY_LETTERS)
     .required(Validation.REQUIRED),
-
 })
 
 

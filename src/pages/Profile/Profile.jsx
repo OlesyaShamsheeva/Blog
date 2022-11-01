@@ -1,28 +1,24 @@
-import { useContext, useEffect, useState } from "react";
-import { useFormik } from "formik";
+import { PhotoUser } from '../../components/PhotoUser';
+import { NoPhoto } from '../../components/PhotoUser/NoPhoto';
+import { ActivePhoto } from '../../components/PhotoUser/ActivePhoto';
 
-
-import { PhotoUser } from "../../components/PhotoUser";
-import { NoPhoto } from "../../components/PhotoUser/NoPhoto";
-import { ActivePhoto } from "../../components/PhotoUser/ActivePhoto";
-import { TextField } from "../../components/TextField";
-
-
-import styles from "./Profile.module.css";
+import { Form } from '../RegistrationUser/Form';
 import { useProfile } from './Profile.utils';
-
+import styles from './Profile.module.css';
 
 export const Profile = () => {
   const {
     user,
+    inputProfile,
     handleImageChange,
     handleDeleteImage,
     handleSubmit,
     handleChange,
-    inputProfile,values,errors,error,touched
-
+    values,
+    errors,
+    error,
+    touched
   } = useProfile()
-
 
   return (
     <div className={styles.wrap}>
@@ -36,28 +32,13 @@ export const Profile = () => {
                 onDelete={handleDeleteImage}
               />
             ) : (
-              <NoPhoto onChange={handleImageChange} />
+              <NoPhoto onChange={handleImageChange}/>
             )}
           </PhotoUser>
         </div>
-        <form onSubmit={handleSubmit} >
-          {inputProfile.map((input) => (
-            <div key={input.name}>
-               <TextField
-                 input={input}
-                 name={input.name}
-                 onChange={handleChange}
-                 value={values[input.name]}
-                 inputRegistr={false}
-               />
-              {touched[input.name] &&errors[input.name] ? (
-                <div className={styles.errorvalid}>
-                  {errors[input.name]}
-                </div>
-              ) : null}
-            </div>
-          ))}
-          {error && <div className={styles.error}>email already in use</div>}
+        <form onSubmit={handleSubmit}>
+          <Form array={inputProfile} handleChange={handleChange} values={values} touched={touched} errors={errors}
+                error={error}/>
           <div className={styles.div}>
             <textarea
               onChange={handleChange}
@@ -65,11 +46,9 @@ export const Profile = () => {
               value={values.description}
             />
           </div>
-          <div className={styles.submit}>
-            <button type="submit" className={styles.btn}>
-              Save Changes
-            </button>
-          </div>
+          <button type="submit" className={styles.btn}>
+            Save Changes
+          </button>
         </form>
       </div>
     </div>

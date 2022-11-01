@@ -12,7 +12,7 @@ export const Article = ({ article, isBigImg = false, isVertical = false, isBigAv
 
   return (
     <div className={`${styles.wrapper} ${isVertical ? styles.column : styles.row}`}>
-      <div className={styles.img}>
+      <div>
         <ImgArticle photo={article.imgArticle} isBigImg={isBigImg}/>
       </div>
       <div className={styles.informBlock}>
@@ -26,11 +26,10 @@ export const Article = ({ article, isBigImg = false, isVertical = false, isBigAv
         <div className={styles.text}
              dangerouslySetInnerHTML={{ __html: article.description }}/>
         <div className={styles.inform}>
-          <div className={styles.img}>
-            <PhotoUser photo={article.userAvatar}
+          <div>
+            <PhotoUser photo={article.avatar}
                        isBigAvatar={isBigAvatar}/>
           </div>
-
           <span className={styles.name}>
               {article.firstName}
             <span> {article.lastName}</span>

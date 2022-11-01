@@ -7,16 +7,20 @@
   text-align: start;
   color: #242424;
 }
-.errorvalid{
-  color:red
+
+.errorvalid {
+  color: red
 }
+
 .block {
   display: flex;
   flex-direction: row;
 }
-.wrap{
+
+.wrap {
   padding-left: 50px;
 }
+
 .formInput {
   display: flex;
   flex-direction: column;
@@ -85,11 +89,12 @@ textarea {
   flex-direction: row;
   gap: 48px;
 }
-.foto{
+
+.foto {
   padding-left: 1px;
 }
 
-@media (max-width: 1300px){
+@media (max-width: 1300px) {
   input {
     width: 200px;
     height: 47px;
@@ -97,39 +102,44 @@ textarea {
   }
 }
 
-@media (max-width: 1024px){
+@media (max-width: 1024px) {
   .inputChange {
     gap: 16px;
   }
+
   .caption {
     font-size: 42px;
   }
 }
-@media (max-width: 850px){
+
+@media (max-width: 850px) {
   .inputChange {
     display: flex;
     flex-direction: column;
   }
+}
 
-}
-@media (max-width: 650px){
-.block{
-  flex-direction: column;
-}
-  .foto{
+@media (max-width: 650px) {
+  .block {
+    flex-direction: column;
+  }
+
+  .foto {
     display: flex;
     padding-bottom: 40px;
   }
+
   .caption {
     font-size: 32px;
     padding-left: 40px;
   }
-  .div{
+
+  .div {
     width: 420px;
   }
-.submit{
-display: flex;
-  align-content: center;
-}
 
+  .submit {
+    display: flex;
+    align-content: center;
+  }
 }

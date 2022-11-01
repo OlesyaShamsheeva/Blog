@@ -9,7 +9,8 @@
 .button:focus {
   color: #242424;
 }
-.img{
+
+.img {
   display: flex;
   align-content: start;
   width: 650px;
@@ -127,18 +128,20 @@
 }
 
 
-@media (max-width: 850px){
+@media (max-width: 850px) {
   .name {
     font-size: 12px;
   }
+
   .wrapper {
     display: flex;
     flex-direction: column;
-    gap:50px;
+    gap: 50px;
     padding-left: 50px;
   }
 }
-@media (max-width: 650px){
+
+@media (max-width: 650px) {
   .buttonTag {
     font-size: 12px;
     width: 80px;

@@ -5,17 +5,54 @@ import jwt_decode from 'jwt-decode';
 import { deletePhoto, myProfile, updateProfile } from '../../http/userApi';
 import { MyContext } from '../../App';
 import { ProfileFormValidation } from './ProfileFormValidation';
-import {    InputProfile} from "../../pages/Profile/hooks/InputProfile"
 
 export const useProfile = () => {
   const { user, setUser } = useContext(MyContext);
   const [error] = useState(false);
 
-const {InputProfile,setValues, handleSubmit,
-  handleChange,
-  values,
-  touched,
-  errors,}=InputProfile()
+  const {
+    handleSubmit,
+    handleChange,
+    values,
+    touched,
+    errors,
+    setValues,
+  } = useFormik({
+    initialValues: {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      description: user.description,
+    },
+    validationSchema: ProfileFormValidation,
+    onSubmit: async (values) => {
+      const data = await updateProfile({
+        avatar: user.avatar,
+        description: values.description,
+        emailAddress: user.emailAddress,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        name: "",
+        password: user.password,
+        __v: user.__v,
+        _id: user._id,
+      });
+      setUser(data);
+    },
+  });
+
+  const inputProfile= [
+    {
+      label: "First Name",
+      name: "firstName",
+      value: values.firstName,
+    },
+    {
+      label: "Last Name",
+      name: "lastName",
+      value: values.lastName,
+    }
+  ];
+
   const convertBase64 = (file) =>
     new Promise((resolve, reject) => {
       const fileReader = new FileReader();
@@ -51,7 +88,7 @@ const {InputProfile,setValues, handleSubmit,
   }, []);
 
   return {
-    InputProfile,
+    inputProfile,
     user,
     error,
     handleImageChange,

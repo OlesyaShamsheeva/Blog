@@ -1,38 +1,21 @@
-import { useContext, useEffect } from 'react';
-import { usePagination } from '../../hook/usePagination';
-
 import { Article } from '../../components/Article/';
 import { NotArticles } from '../../components/Article/NoArticle';
+
 import { PhotoUser } from '../../components/PhotoUser';
-
-import jwt_decode from 'jwt-decode';
-
-import { MyContext } from '../../App';
-import { myProfile } from '../../http/userApi';
-import { myArticleId } from '../../http/articleApi';
-import styles from './MyArticles.module.css'
 import { Pagination } from '../../components/Pagination';
+import { useMyArticles } from './MyArticles.utils';
 
+import styles from './MyArticles.module.css'
 
-export const MyArticles = ( { bigAvatar = false } ) => {
-  const { article, setArticle } = useContext(MyContext)
-  const { user, setUser } = useContext(MyContext)
-
+export const MyArticles = ({ bigAvatar = false }) => {
   const {
     firstContentIndex,
     lastContentIndex,
     nextPage,
     prevPage,
-  } = usePagination({
-    contentPerPage: 3,
-    count: article.length,
-  });
-
-  useEffect(() => {
-    const { userId } = jwt_decode(localStorage.getItem('token').slice(7))
-    myArticleId(userId).then((res) => setArticle(res))
-    myProfile(userId).then((res) => setUser(res))
-  }, [])
+    article,
+    user,
+  } = useMyArticles()
 
   return (
     <div>
@@ -42,8 +25,8 @@ export const MyArticles = ( { bigAvatar = false } ) => {
             photo={user.avatar}
             bigAvatar={bigAvatar} isBigAvatar/>
           <div className={styles.name}>
-         <span>{user.firstName}</span>
-         <span className={styles.lastName}>{user.lastName}</span>
+            <span>{user.firstName}</span>
+            <span className={styles.lastName}>{user.lastName}</span>
           </div>
           <div className={styles.text}>
             {user.description}
@@ -54,7 +37,7 @@ export const MyArticles = ( { bigAvatar = false } ) => {
             <Article isVertical isBigImg key={article._id} article={article}/>
           ))) : <NotArticles/>}
           <div className={styles.pagBtn}>
-            {article.length > 0 ? <Pagination next={nextPage} prev={prevPage} />:""}
+            {article.length > 0 ? <Pagination next={nextPage} prev={prevPage}/> : ''}
           </div>
         </div>
       </div>

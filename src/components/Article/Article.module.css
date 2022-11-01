@@ -1,10 +1,10 @@
 
 .wrapper {
   display: flex;
-  justify-content: center;
   align-items: start;
   align-self: stretch;
   padding-bottom: 40px;
+  padding-left: 0px;
   gap: 24px;
 }
 
@@ -21,6 +21,7 @@
   flex-direction: column;
   justify-content: space-around;
   border-bottom: 1px solid #EBEBEB;
+  padding-left: 30px;
 }
 
 .tag {
@@ -57,7 +58,6 @@
   font-size: 16px;
   line-height: 26px;
   color: #8C8C8C;
-  padding: 0px;
 }
 .ava {
   width: 72px;

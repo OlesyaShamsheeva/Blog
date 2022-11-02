@@ -1,40 +1,36 @@
-import { useContext, useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 
-import { MyContext } from '../../App';
 import { usePagination } from '../../hook/usePagination';
 import { getAllArticles } from '../../http/articleApi';
+import { useGetArticlesQuery } from '../../store/article/article.api';
 
 export const useAllArticles = () => {
-  const { article, setArticle } = useContext(MyContext);
+  const { data: articles, isLoading, error } = useGetArticlesQuery(6)
   const [popularArticle, setPopularArticle] = useState(null);
-
   const { firstContentIndex, lastContentIndex, nextPage, prevPage } =
     usePagination({
       contentPerPage: 3,
-      count: article.length,
+      count: articles?.length,
     });
-
   useEffect(() => {
     const handleGetArticles = async () => {
       const { data } = await getAllArticles();
       const newData = [...data];
       newData.sort((a, b) => b.viewCounter - a.viewCounter);
       setPopularArticle(newData[0]);
-      setArticle(
-        newData
-          .filter((article) => article._id !== newData[0]._id)
-      );
     };
     handleGetArticles();
   }, []);
 
   return {
     popularArticle,
-    article,
+    articles,
     firstContentIndex,
     lastContentIndex,
     nextPage,
-    prevPage
+    prevPage,
+    isLoading,
+    error,
   }
 
 

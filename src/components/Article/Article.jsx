@@ -6,10 +6,14 @@ import { PhotoUser } from '../PhotoUser';
 import { Routes } from '../../constants';
 import glass from '../../assets/imgs/glass.png'
 import styles from './Article.module.css'
+import { useGetUserArtQuery } from '../../store/article/article.api';
 
 export const Article = ({ article, isBigImg = false, isVertical = false, isBigAvatar = false }) => {
   const navigate = useNavigate()
-
+  const {}= useGetUserArtQuery(article._id)
+  const handle=()=>{
+    navigate(Routes.ARTICLE_DETAIL.replace(/:[a-zA-Z?]+/g, article._id))
+  }
   return (
     <div className={`${styles.wrapper} ${isVertical ? styles.column : styles.row}`}>
       <div>
@@ -20,7 +24,7 @@ export const Article = ({ article, isBigImg = false, isVertical = false, isBigAv
           #{article.category}
         </span>
         <h4 className={styles.caption}
-            onClick={() => navigate(Routes.ARTICLE_DETAIL.replace(/:[a-zA-Z?]+/g, article._id))}>
+            onClick={()=> handle(article._id)}>
           {article.title}
         </h4>
         <div className={styles.text}

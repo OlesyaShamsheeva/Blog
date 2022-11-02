@@ -6,16 +6,24 @@ import { Pagination } from '../../components/Pagination';
 import { useMyArticles } from './MyArticles.utils';
 
 import styles from './MyArticles.module.css'
+import { usePagination } from '../../hook/usePagination';
+import {useGetUserArtQuery} from '../../store/article/article.api';
 
 export const MyArticles = ({ bigAvatar = false }) => {
+  const {
+    article,
+    user,
+  } = useMyArticles()
+
   const {
     firstContentIndex,
     lastContentIndex,
     nextPage,
     prevPage,
-    article,
-    user,
-  } = useMyArticles()
+  } = usePagination({
+    contentPerPage: 3,
+    count: article.length,
+  });
 
   return (
     <div>

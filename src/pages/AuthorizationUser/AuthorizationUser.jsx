@@ -6,7 +6,6 @@ import { Routes } from '../../constants'
 import styles from './AuthorizationUser.module.css'
 
 export const AuthorizationUser = () => {
-
   const {
     passwordFormInput,
     handleChangeAut,

@@ -8,7 +8,7 @@ import { Routes } from '../../constants'
 export const useAddArticle = () => {
 
   const navigate = useNavigate()
-  const { article, setArticle, user } = useContext(MyContext)
+  const {article,setArticle, user } = useContext(MyContext)
   const [file, setFile] = useState(null)
 
   const articleFormInputs = [

@@ -4,10 +4,14 @@ import { PhotoArticle } from '../../components/PhotoArticle';
 
 import { useAddArticle } from './AddArticle.utils';
 import styles from './AddArticle.module.css'
+import { articleApi } from '../../store/article/article.api';
 
 
 export const AddArticle = ({ inputRegistr = false }) => {
 
+  const [createArticle,{}]=articleApi.useCreateArticleMutation({
+
+  })
   const {
     file,
     article,
@@ -18,7 +22,9 @@ export const AddArticle = ({ inputRegistr = false }) => {
     handleImageChange,
     handleDeleteImage,
   } = useAddArticle()
-
+const handleCreate=async ()=>{
+await createArticle({article,body:article})
+}
   return (
     <div className={styles.wrap}>
       <h1 className={styles.caption}>
@@ -50,8 +56,7 @@ export const AddArticle = ({ inputRegistr = false }) => {
           </>
         </div>
         <button
-          className={styles.buttonPublish}
-          type="submit">
+          className={styles.buttonPublish} onClick={handleCreate}>
           Publish an article
         </button>
       </form>

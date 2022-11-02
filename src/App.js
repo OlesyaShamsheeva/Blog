@@ -12,6 +12,7 @@ import { AddArticle } from './pages/AddArticle/AddArticle';
 
 import { Routes } from './constants';
 import './App.css';
+import { useGetArticlesQuery } from './store/article/article.api';
 
 export const MyContext = createContext()
 
@@ -19,7 +20,6 @@ function App() {
   const [isAuth, setIsAuth] = useState(!!localStorage.getItem('token'))
   const [user, setUser] = useState({})
   const [article, setArticle] = useState([])
-
   const renderPrivateComponent = (component) => (
     isAuth ? (
       <MainContainer>

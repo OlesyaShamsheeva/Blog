@@ -6,10 +6,10 @@ import {Routes} from "../../constants"
 import { registration } from '../../http/userApi';
 import { ValidationSchema } from './ValidationSchema';
 
+
 export const useRegistration= () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
-
   const {
     values,
     handleSubmit,

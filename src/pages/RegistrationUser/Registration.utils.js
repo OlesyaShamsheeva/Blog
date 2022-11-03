@@ -33,7 +33,7 @@ export const useRegistration= () => {
       setError(false)
       navigate(Routes.AUTHORIZATION)
     }).catch(() => setError(true))
-    createUser({values,body:values})
+    createUser({...values,body:values})
   },
 });
   console.log(values)

@@ -5,10 +5,14 @@ import { useFormik } from 'formik';
 import {Routes} from "../../constants"
 import { registration } from '../../http/userApi';
 import { ValidationSchema } from './ValidationSchema';
+import { authApi } from '../../store/auth/auth.api';
 
 
 export const useRegistration= () => {
   const [error, setError] = useState(false);
+  const [createUser,{}]=authApi.useCreateUserMutation({
+  })
+
   const navigate = useNavigate();
   const {
     values,
@@ -24,14 +28,15 @@ export const useRegistration= () => {
     password: '',
   },
   validationSchema: ValidationSchema,
-  onSubmit: (values) => {
-    registration(values).then(() => {
+  onSubmit: async (values) => {
+    await registration(values).then(() => {
       setError(false)
       navigate(Routes.AUTHORIZATION)
     }).catch(() => setError(true))
+    createUser({values,body:values})
   },
 });
-
+  console.log(values)
 const registerFormInputs = [
   {
     label: 'First Name',
@@ -67,5 +72,6 @@ const registerFormInputs = [
     values,
     touched,
     errors,
+
   }
 }

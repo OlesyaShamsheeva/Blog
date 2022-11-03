@@ -7,7 +7,6 @@ import { useMyArticles } from './MyArticles.utils';
 
 import styles from './MyArticles.module.css'
 import { usePagination } from '../../hook/usePagination';
-import {useGetUserArtQuery} from '../../store/article/article.api';
 
 export const MyArticles = ({ bigAvatar = false }) => {
   const {

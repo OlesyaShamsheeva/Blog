@@ -11,7 +11,6 @@ export const ArticleDetails = ({ isBigAvatar = false }) => {
     navigate,
     article,
   } = useArticleDetails()
-
   return (
     <div className={styles.wrapper}>
       <button className={styles.button}

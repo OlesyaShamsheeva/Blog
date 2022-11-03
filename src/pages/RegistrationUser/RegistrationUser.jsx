@@ -4,13 +4,10 @@ import { Form } from './Form';
 import { useRegistration } from './Registration.utils';
 import { Routes } from '../../constants'
 import styles from './RegistrationUser.module.css'
-import { userApi } from '../../store/users/user.api';
-
+import {authApi} from '../../store/auth/auth.api';
 
 export const RegistrationUser = () => {
-  const [createUser,{}]=userApi.useCreateUserMutation({
-values
-  })
+
   const {
     error,
     handleSubmit,
@@ -20,17 +17,14 @@ values
     touched,
     errors,
   } = useRegistration()
-  const handleCreate=async ()=>{
-    await createUser({values,body:values})
-  }
-  console.log(values)
+
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.h1}>Create your free account</h1>
       <form onSubmit={handleSubmit}>
         <Form array={registerFormInputs} handleChange={handleChange} values={values} touched={touched} errors={errors}
               error={error}/>
-        <button className={styles.button} onClick={handleCreate}>
+        <button className={styles.button} type="submit">
           Create Account
         </button>
       </form>

@@ -6,11 +6,10 @@ import { PhotoUser } from '../PhotoUser';
 import { Routes } from '../../constants';
 import glass from '../../assets/imgs/glass.png'
 import styles from './Article.module.css'
-import { useGetUserArtQuery } from '../../store/article/article.api';
 
 export const Article = ({ article, isBigImg = false, isVertical = false, isBigAvatar = false }) => {
   const navigate = useNavigate()
-  const {}= useGetUserArtQuery(article._id)
+
   const handle=()=>{
     navigate(Routes.ARTICLE_DETAIL.replace(/:[a-zA-Z?]+/g, article._id))
   }

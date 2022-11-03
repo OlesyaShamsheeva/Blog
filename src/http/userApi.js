@@ -11,7 +11,7 @@ export const authorization = async (emailAddress, password) => {
     password,
   });
   localStorage.setItem('token', data.token);
-  return data.user;
+  return data;
 };
 
 export const myProfile = async (userId) => {
